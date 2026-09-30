@@ -4,9 +4,10 @@ Everything needed to study for JLPT N3, on an Android device, offline.
 
 Vocabulary, kanji and grammar in one spaced-repetition queue; reading,
 listening, speaking and writing practice over the same corpus; a daily
-reminder. **The app never talks to a network.** All of it — 3,526 words,
-612 kanji, 145 grammar points and 26,269 example sentences — ships inside
-the APK as a 4.8 MB SQLite file.
+real-world challenge chosen to fit what you're currently learning; a
+daily reminder. **The app never talks to a network.** All of it — 3,526
+words, 612 kanji, 145 grammar points, 52 challenge scenarios and 26,269
+example sentences — ships inside the APK as a 4.9 MB SQLite file.
 
 Covers **N5 through N3 cumulatively**, not just the N3-specific delta.
 The scheduler surfaces earlier material you have forgotten rather than
@@ -29,6 +30,7 @@ same source.
 | **Speaking** | Record an attempt, play it against the reference |
 | **Writing** | Trace kanji stroke by stroke, in the right order |
 | **Grammar** | 145 points with real attested examples |
+| **Daily challenge** | A real-world task to attempt out loud, chosen to fit your deck |
 
 ## The content
 
@@ -42,10 +44,19 @@ Assembled by `tool/build_content.py` from open data and shipped as
 | [jmdict-simplified](https://github.com/scriptin/jmdict-simplified) | CC BY-SA 4.0 | dictionary entries and Tatoeba example sentences |
 | [KanjiVG](https://github.com/KanjiVG/kanjivg) | CC BY-SA 3.0 | stroke-by-stroke paths |
 | `tool/grammar.json` | — | the grammar points, authored in this repo |
+| `tool/challenges.json` | — | the daily challenge scenarios, authored in this repo |
 
 JMdict is © the Electronic Dictionary Research and Development Group;
 KanjiVG is © Ulrich Apel. Both are share-alike, and the derived database
 carries that.
+
+The build **fails loudly on contaminated authored data**. Writing
+`grammar.json` and `challenges.json` by hand twice produced a stray
+Cyrillic or Latin-Extended fragment inside a Japanese sentence — invisible
+in a diff, and it reaches the device as a line that cannot be read or
+spoken. `check_authored` rejects those script ranges outright, and holds
+vocabulary keys to Japanese-only, since anything else can never join
+against the word table.
 
 **The JLPT has published no official word or kanji list since 2010.**
 Every "N3 vocabulary list" in existence is a community reconstruction,
@@ -91,6 +102,41 @@ Shortest first because an example is there to show one thing — a
 forty-character sentence with three other unknown structures in it
 demonstrates nothing about the pattern you are looking at.
 
+## Daily challenges
+
+Order a coffee. Give someone directions. Explain what you can't eat. Turn
+down an invitation without a fight. 52 scenarios across 13 categories,
+graded N5 to N3, each with a concrete goal, the steps to hit, real
+phrases, and a harder version for when the plain one stops being work.
+
+This exists because of the gap every SRS has: you can answer four
+thousand cards correctly and still freeze at a café counter. Recognising
+a word on a card and producing it under time pressure in front of a
+stranger are different skills, and a flashcard only trains one of them.
+
+**The day's challenge is chosen to fit your deck.** Each scenario's
+vocabulary is resolved to real word rows at build time (200 of 201
+links), so the app can score how much of a scenario is made of words you
+are *currently part-way through* — not words you don't know yet, and not
+words you mastered two months ago. A scenario where you know everything
+is no longer practice; one where you know nothing is a vocabulary list,
+not a task. What earns a challenge its place is the middle.
+
+The pick is deterministic per day and ranked by that fit, then chosen by
+the date from the top eight. Ranking alone would hand you the same
+scenario every day until your deck moved; picking at random would ignore
+the deck entirely. Anything done in the last fortnight is held back.
+
+**"Work these in"** is the direct answer to practising what you're
+learning: five words currently in motion, the scenario's own first, then
+filled from the rest of the deck hardest-first — a word you have lapsed
+on repeatedly is the one worth forcing into a sentence today.
+
+The phrases are folded away by default. A safety net you are already
+standing on is a floor, and having to open it is the difference between
+recalling and reading. Nothing checks whether you actually said it out
+loud, and the screen says so.
+
 ## The scheduler
 
 `lib/srs.dart` — SM-2 with learning steps. Plain Dart with no clock of
@@ -121,6 +167,20 @@ indistinguishable from never seeing it), ease has a floor of 1.3 (below
 that a card is in front of you every other day forever), and a card
 failed eight times is flagged as a leech rather than left to keep
 surfacing.
+
+### The level filter ran backwards
+
+Worth recording because it was invisible and shipped in the first commit.
+The JLPT numbers run backwards to the names — N5 is the *easiest* level
+and the *highest* number — and the deck-scope query used `level >= x`.
+So the setting labelled "N5–N3" returned 718 words (N5 only) instead of
+3,526, and "N3 only" returned everything. The default was the inverted
+one, so the app studied the opposite of what it said.
+
+The scope filter is now `level <= easiestLevel`, and the parameter is
+named for what it means rather than for the comparison. The sentence
+grader keeps `>=` because there it really is a difficulty ceiling —
+the same numbers, the opposite question. A test pins both directions.
 
 ## Keeping a deck usable
 
@@ -201,6 +261,7 @@ imports, so they test with no device attached.
 | `lib/app_state.dart` | The one object every screen reads from |
 | `lib/writing_screen.dart` | Stroke tracing; its parser and comparison are pure and tested |
 | `lib/speech.dart`, `lib/notifications.dart` | The thin layer that touches plugins |
+| `lib/challenge.dart` | Picking the day's challenge and matching it to the deck |
 | `tool/build_content.py` | Everything above, assembled from open data |
 
 **Progress lives in a separate database from the content**, and that

@@ -53,7 +53,7 @@ class _WritingScreenState extends State<WritingScreen> {
 
   Future<void> _load() async {
     final all = await widget.app.content.kanji(
-      minLevel: widget.app.settings.minLevel,
+      easiestLevel: widget.app.settings.easiestLevel,
     );
     // Only characters that actually have stroke data. Offering a writing
     // exercise with nothing to trace is worse than not listing it.

@@ -8,6 +8,7 @@ library;
 
 import 'package:flutter/foundation.dart';
 
+import 'challenge.dart';
 import 'content.dart';
 import 'notifications.dart';
 import 'review_store.dart';
@@ -36,6 +37,15 @@ class AppState extends ChangeNotifier {
   /// The daily reminder, as `HH:mm`, or null when it is off.
   String? reminderAt;
 
+  /// Today's challenge, and whether it has been done. Null only when the
+  /// content database has no challenges in it at all.
+  ChallengeRef? todaysChallenge;
+  Challenge? todaysChallengeDetail;
+  bool challengeDoneToday = false;
+  int challengeStreakDays = 0;
+
+  List<({Challenge challenge, List<int> wordIds})> _allChallenges = const [];
+
   bool loading = true;
 
   static Future<AppState> load() async {
@@ -53,7 +63,7 @@ class AppState extends ChangeNotifier {
     settings = StudySettings(
       newPerDay: await store.intSetting('newPerDay', 15),
       maxReviewsPerDay: await store.intSetting('maxReviewsPerDay', 120),
-      minLevel: await store.intSetting('minLevel', 5),
+      easiestLevel: await store.intSetting('easiestLevel', 5),
       includeWords: await store.intSetting('includeWords', 1) == 1,
       includeKanji: await store.intSetting('includeKanji', 1) == 1,
       includeGrammar: await store.intSetting('includeGrammar', 1) == 1,
@@ -66,6 +76,7 @@ class AppState extends ChangeNotifier {
     final now = DateTime.now();
     reviewedToday = await store.reviewedToday(now);
     streak = await store.streak(now);
+    await _refreshChallenge(now);
 
     loading = false;
     notifyListeners();
@@ -75,14 +86,67 @@ class AppState extends ChangeNotifier {
     // Ordered per kind, then concatenated. The queue interleaves new
     // cards itself, so the order within each kind is what matters —
     // commonest words first, commonest kanji first.
-    final words = await content.words(minLevel: settings.minLevel);
-    final kanji = await content.kanji(minLevel: settings.minLevel);
-    final grammar = await content.grammar(minLevel: settings.minLevel);
+    final words = await content.words(easiestLevel: settings.easiestLevel);
+    final kanji = await content.kanji(easiestLevel: settings.easiestLevel);
+    final grammar = await content.grammar(easiestLevel: settings.easiestLevel);
     available = [
       for (final w in words) w.cardId,
       for (final k in kanji) k.cardId,
       for (final g in grammar) g.cardId,
     ];
+  }
+
+  Future<void> _refreshChallenge(DateTime now) async {
+    if (_allChallenges.isEmpty) {
+      _allChallenges = await content.challenges();
+    }
+    final refs = [
+      for (final c in _allChallenges)
+        ChallengeRef(
+          id: c.challenge.id,
+          level: c.challenge.level,
+          wordIds: c.wordIds,
+        ),
+    ];
+
+    final pick = pickDaily(
+      refs,
+      states,
+      now,
+      recentlyDone: await store.recentChallenges(),
+      easiestLevel: settings.easiestLevel,
+    );
+
+    todaysChallenge = pick;
+    todaysChallengeDetail = pick == null
+        ? null
+        : _allChallenges
+            .firstWhere((c) => c.challenge.id == pick.id)
+            .challenge;
+    challengeDoneToday =
+        pick != null && await store.didChallengeToday(pick.id, now);
+    challengeStreakDays =
+        challengeStreak(await store.challengeCompletions(), now);
+  }
+
+  /// Marks today's challenge done and moves the streak on.
+  Future<void> completeChallenge({String? note}) async {
+    final pick = todaysChallenge;
+    if (pick == null || challengeDoneToday) return;
+    final now = DateTime.now();
+    await store.completeChallenge(pick.id, now, note: note);
+    challengeDoneToday = true;
+    challengeStreakDays =
+        challengeStreak(await store.challengeCompletions(), now);
+    notifyListeners();
+  }
+
+  /// The words worth deliberately using in today's attempt.
+  Future<List<Word>> challengeWordsToPractise() async {
+    final pick = todaysChallenge;
+    if (pick == null) return const [];
+    final ids = wordsToPractise(pick, states, DateTime.now());
+    return content.wordsByIds(ids);
   }
 
   SessionSummary get summary => summarise(
@@ -130,11 +194,11 @@ class AppState extends ChangeNotifier {
   // ---------------------------------------------------------- settings
 
   Future<void> updateSettings(StudySettings next) async {
-    final levelChanged = next.minLevel != settings.minLevel;
+    final levelChanged = next.easiestLevel != settings.easiestLevel;
     settings = next;
     await store.setSetting('newPerDay', '${next.newPerDay}');
     await store.setSetting('maxReviewsPerDay', '${next.maxReviewsPerDay}');
-    await store.setSetting('minLevel', '${next.minLevel}');
+    await store.setSetting('easiestLevel', '${next.easiestLevel}');
     await store.setSetting('includeWords', next.includeWords ? '1' : '0');
     await store.setSetting('includeKanji', next.includeKanji ? '1' : '0');
     await store.setSetting('includeGrammar', next.includeGrammar ? '1' : '0');

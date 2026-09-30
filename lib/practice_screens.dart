@@ -21,14 +21,14 @@ import 'theme.dart';
 /// to study and is not any single JLPT grade.
 class _Difficulty extends StatelessWidget {
   const _Difficulty({
-    required this.minLevel,
+    required this.hardestLevel,
     required this.maxChars,
     required this.onChanged,
   });
 
-  final int minLevel;
+  final int hardestLevel;
   final int maxChars;
-  final void Function(int minLevel, int maxChars) onChanged;
+  final void Function(int hardestLevel, int maxChars) onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -41,15 +41,15 @@ class _Difficulty extends StatelessWidget {
               const SizedBox(width: 70, child: Text('Level')),
               Expanded(
                 child: Slider(
-                  value: minLevel.toDouble(),
+                  value: hardestLevel.toDouble(),
                   min: 3,
                   max: 5,
                   divisions: 2,
-                  label: '${levelName(minLevel)} and easier',
+                  label: '${levelName(hardestLevel)} and easier',
                   onChanged: (v) => onChanged(v.round(), maxChars),
                 ),
               ),
-              SizedBox(width: 44, child: Text(levelName(minLevel))),
+              SizedBox(width: 44, child: Text(levelName(hardestLevel))),
             ],
           ),
           Row(
@@ -60,7 +60,7 @@ class _Difficulty extends StatelessWidget {
                   value: maxChars.toDouble(),
                   min: 10,
                   max: 80,
-                  onChanged: (v) => onChanged(minLevel, v.round()),
+                  onChanged: (v) => onChanged(hardestLevel, v.round()),
                 ),
               ),
               SizedBox(width: 44, child: Text('$maxChars')),
@@ -79,7 +79,7 @@ mixin _SentencePool<T extends StatefulWidget> on State<T> {
 
   List<Sentence> sentences = const [];
   int index = 0;
-  int minLevel = 4;
+  int hardestLevel = 4;
   int maxChars = 40;
   int _batch = 0;
   bool loading = true;
@@ -88,7 +88,7 @@ mixin _SentencePool<T extends StatefulWidget> on State<T> {
     setState(() => loading = true);
     if (next) _batch++;
     final rows = await app.content.practiceSentences(
-      minLevel: minLevel,
+      hardestLevel: hardestLevel,
       maxChars: maxChars,
       limit: 30,
       seed: _batch,
@@ -103,7 +103,7 @@ mixin _SentencePool<T extends StatefulWidget> on State<T> {
 
   void setDifficulty(int level, int chars) {
     setState(() {
-      minLevel = level;
+      hardestLevel = level;
       maxChars = chars;
     });
     loadBatch();
@@ -153,7 +153,7 @@ class _ReadingScreenState extends State<ReadingScreen>
       body: Column(
         children: [
           _Difficulty(
-            minLevel: minLevel,
+            hardestLevel: hardestLevel,
             maxChars: maxChars,
             onChanged: setDifficulty,
           ),
@@ -268,7 +268,7 @@ class _ListeningScreenState extends State<ListeningScreen>
           if (!voice.available && voice.problem != null)
             _VoiceWarning(problem: voice.problem!),
           _Difficulty(
-            minLevel: minLevel,
+            hardestLevel: hardestLevel,
             maxChars: maxChars,
             onChanged: setDifficulty,
           ),
@@ -435,7 +435,7 @@ class _SpeakingScreenState extends State<SpeakingScreen>
       body: Column(
         children: [
           _Difficulty(
-            minLevel: minLevel,
+            hardestLevel: hardestLevel,
             maxChars: maxChars,
             onChanged: setDifficulty,
           ),

@@ -240,12 +240,64 @@ def harvest_sentences(jm):
     return pairs, cites
 
 
+# -------------------------------------------------------------- checking
+
+# Scripts that have no business being in this data. Authoring these files
+# by hand has twice produced a stray Cyrillic or Latin-Extended fragment
+# inside a Japanese sentence — invisible at a glance, and it reaches a
+# tablet as a sentence that cannot be read or spoken. Latin letters are
+# allowed because real Japanese uses them (Mサイズ, QRコード); these
+# ranges never appear in it.
+FOREIGN = re.compile(
+    r"[\u0400-\u04ff\u0370-\u03ff\u0590-\u05ff\u0600-\u06ff"
+    r"\u0100-\u024f\u1e00-\u1eff]"
+)
+
+# A vocabulary key has to be pure Japanese: it is matched against the word
+# table, and anything else can never join.
+JAPANESE_ONLY = re.compile(r"^[\u3040-\u30ff\u4e00-\u9fff\u3005\u30fc]+$")
+
+
+def check_authored(records, label, japanese_fields, vocab_field=None):
+    """Fails the build on contaminated authored data.
+
+    Loudly, and before anything is written: a sentence with a Cyrillic
+    fragment in it looks fine in a diff and is unreadable on the device.
+    """
+    problems = []
+    for r in records:
+        for field in japanese_fields:
+            value = r.get(field)
+            for text in ([value] if isinstance(value, str) else (value or [])):
+                if isinstance(text, dict):
+                    text = text.get("jp", "")
+                if text and FOREIGN.search(text):
+                    problems.append(f"{r.get('id')}.{field}: {text!r}")
+        for v in (r.get(vocab_field) or []) if vocab_field else []:
+            if not JAPANESE_ONLY.match(v):
+                problems.append(f"{r.get('id')}.{vocab_field}: {v!r}")
+    if problems:
+        raise SystemExit(
+            f"!! {label} contains characters that cannot be Japanese:\n  "
+            + "\n  ".join(problems)
+        )
+
+
 # ---------------------------------------------------------------- grammar
 
 def load_grammar():
     path = os.path.join(HERE, "grammar.json")
     if not os.path.exists(path):
         log("  !! tool/grammar.json missing — grammar tables will be empty")
+        return []
+    with open(path, encoding="utf-8") as f:
+        return json.load(f)
+
+
+def load_challenges():
+    path = os.path.join(HERE, "challenges.json")
+    if not os.path.exists(path):
+        log("  !! tool/challenges.json missing — no daily challenges")
         return []
     with open(path, encoding="utf-8") as f:
         return json.load(f)
@@ -312,6 +364,10 @@ CREATE INDEX kanji_level ON kanji(level);
 
 CREATE TABLE grammar (
   id        INTEGER PRIMARY KEY,
+  -- The authored id from grammar.json. Stable across rebuilds, which the
+  -- integer id is not, so anything referring to a grammar point by name
+  -- keeps working when a point is inserted in the middle.
+  slug      TEXT NOT NULL UNIQUE,
   pattern   TEXT NOT NULL,
   level     INTEGER NOT NULL,
   category  TEXT,
@@ -351,6 +407,42 @@ CREATE TABLE kanji_word (
 );
 CREATE INDEX kanji_word_kanji ON kanji_word(kanji_id);
 
+-- Daily challenges: a real-world task to attempt out loud.
+CREATE TABLE challenge (
+  id       TEXT PRIMARY KEY,
+  ord      INTEGER NOT NULL,
+  level    INTEGER NOT NULL,
+  category TEXT,
+  title    TEXT NOT NULL,
+  setting  TEXT,
+  goal     TEXT NOT NULL,
+  steps    TEXT NOT NULL,
+  stretch  TEXT
+);
+CREATE INDEX challenge_level ON challenge(level);
+
+CREATE TABLE challenge_phrase (
+  challenge_id TEXT NOT NULL,
+  ord          INTEGER NOT NULL,
+  jp           TEXT NOT NULL,
+  en           TEXT NOT NULL
+);
+CREATE INDEX challenge_phrase_c ON challenge_phrase(challenge_id, ord);
+
+-- Resolved to real word rows at build time. This is what lets the app say
+-- how much of a challenge is made of words already in the deck.
+CREATE TABLE challenge_word (
+  challenge_id TEXT NOT NULL,
+  word_id      INTEGER NOT NULL
+);
+CREATE INDEX challenge_word_c ON challenge_word(challenge_id);
+
+CREATE TABLE challenge_grammar (
+  challenge_id TEXT NOT NULL,
+  grammar_id   INTEGER NOT NULL
+);
+CREATE INDEX challenge_grammar_c ON challenge_grammar(challenge_id);
+
 CREATE TABLE meta (
   key   TEXT PRIMARY KEY,
   value TEXT NOT NULL
@@ -371,7 +463,13 @@ def main():
     stroke_paths = load_stroke_paths({k["literal"] for k in kanji})
     log(f"  strokes    {len(stroke_paths)} of {len(kanji)} kanji")
     grammar = load_grammar()
+    check_authored(grammar, "tool/grammar.json",
+                   ["pattern", "formation", "note", "examples"])
     log(f"  grammar    {len(grammar)} points")
+    challenges = load_challenges()
+    check_authored(challenges, "tool/challenges.json",
+                   ["phrases", "stretch"], vocab_field="vocab")
+    log(f"  challenges {len(challenges)} scenarios")
 
     log("==> enriching vocabulary from the dictionary")
     jm_id_to_word = {}
@@ -479,8 +577,9 @@ def main():
         grows, gsent = [], []
         fallbacks = 0
         for i, g in enumerate(grammar, start=1):
-            grows.append((i, g["pattern"], g["level"], g.get("category"),
-                          g["meaning"], g.get("formation"), g.get("note")))
+            grows.append((i, g["id"], g["pattern"], g["level"],
+                          g.get("category"), g["meaning"], g.get("formation"),
+                          g.get("note")))
             hits = mined.get(g["id"], [])
             if not hits:
                 fallbacks += 1
@@ -502,13 +601,96 @@ def main():
                 for jp in hits:
                     gsent.append((i, sentence_ids[jp]))
         db.executemany(
-            "INSERT INTO grammar (id,pattern,level,category,meaning,"
-            "formation,note) VALUES (?,?,?,?,?,?,?)", grows)
+            "INSERT INTO grammar (id,slug,pattern,level,category,meaning,"
+            "formation,note) VALUES (?,?,?,?,?,?,?,?)", grows)
         db.executemany(
             "INSERT INTO grammar_sentence (grammar_id,sentence_id)"
             " VALUES (?,?)", sorted(set(gsent)))
         log(f"  grammar    {len(grammar) - fallbacks}/{len(grammar)} points "
             f"have attested examples; {fallbacks} fall back to authored ones")
+
+    if challenges:
+        # Vocabulary is resolved to real word rows here rather than matched
+        # by string in the app. That is what lets a challenge say how much
+        # of itself is already in the deck — and doing it at build time
+        # means a word that does not exist is reported now, to the person
+        # who can fix it, instead of silently showing as "not learned".
+        by_expression = {}
+        for v in vocab:
+            by_expression.setdefault(v["expression"], v["id"])
+            for form in v["forms"]:
+                by_expression.setdefault(form, v["id"])
+        by_reading = {}
+        for v in vocab:
+            by_reading.setdefault(v["reading"], v["id"])
+
+        def resolve_word(surface):
+            """Finds the deck word a challenge means.
+
+            Direct spelling first, then reading, then through the
+            dictionary's own list of surface forms — which is what knows
+            that 終わる and 終る are one word. The word lists pick one
+            spelling and it is not always the one a person would write,
+            so matching on the literal string alone drops real links.
+            """
+            wid = by_expression.get(surface) or by_reading.get(surface)
+            if wid:
+                return wid
+            for entry in by_form.get(surface, ()):  # noqa: F821
+                for candidate in jm_id_to_word.get(entry["id"], ()):
+                    return candidate
+            return None
+
+        grammar_ids = {g["id"]: i for i, g in enumerate(grammar, start=1)}
+
+        crows, prows, cwords, cgrammar = [], [], [], []
+        unmatched_vocab, unknown_grammar = [], []
+
+        for n, c in enumerate(challenges):
+            crows.append((
+                c["id"], n, c["level"], c.get("category"), c["title"],
+                c.get("setting"), c["goal"],
+                json.dumps(c.get("steps") or [], ensure_ascii=False),
+                c.get("stretch"),
+            ))
+            for j, ph in enumerate(c["phrases"]):
+                prows.append((c["id"], j, ph["jp"], ph["en"]))
+            for word in c.get("vocab") or []:
+                wid = resolve_word(word)
+                if wid:
+                    cwords.append((c["id"], wid))
+                else:
+                    unmatched_vocab.append(f"{c['id']}:{word}")
+            for slug in c.get("grammar") or []:
+                gid = grammar_ids.get(slug)
+                if gid:
+                    cgrammar.append((c["id"], gid))
+                else:
+                    unknown_grammar.append(f"{c['id']}:{slug}")
+
+        db.executemany(
+            "INSERT INTO challenge (id,ord,level,category,title,setting,"
+            "goal,steps,stretch) VALUES (?,?,?,?,?,?,?,?,?)", crows)
+        db.executemany(
+            "INSERT INTO challenge_phrase (challenge_id,ord,jp,en)"
+            " VALUES (?,?,?,?)", prows)
+        db.executemany(
+            "INSERT INTO challenge_word (challenge_id,word_id)"
+            " VALUES (?,?)", sorted(set(cwords)))
+        db.executemany(
+            "INSERT INTO challenge_grammar (challenge_id,grammar_id)"
+            " VALUES (?,?)", sorted(set(cgrammar)))
+
+        total_vocab = len(cwords) + len(unmatched_vocab)
+        log(f"  challenge vocab {len(cwords)}/{total_vocab} matched a word")
+        if unmatched_vocab:
+            log("    unmatched: " + ", ".join(unmatched_vocab[:10]))
+        if unknown_grammar:
+            # A typo in a grammar slug is silent otherwise: the challenge
+            # just shows no grammar and nobody notices for months.
+            raise SystemExit(
+                "!! challenges reference grammar points that do not exist: "
+                + ", ".join(unknown_grammar))
 
     db.executemany(
         "INSERT INTO meta (key,value) VALUES (?,?)",
@@ -518,7 +700,8 @@ def main():
          ("words", str(len(vocab))),
          ("kanji", str(len(kanji_rows))),
          ("sentences", str(len(sentence_rows))),
-         ("grammar", str(len(grammar)))])
+         ("grammar", str(len(grammar))),
+         ("challenges", str(len(challenges)))])
 
     db.commit()
     db.execute("VACUUM")

@@ -80,8 +80,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
           const SizedBox(height: 16),
           _Heading('What to study'),
           _LevelPicker(
-            value: _draft.minLevel,
-            onChanged: (v) => _apply(_draft.copyWith(minLevel: v)),
+            value: _draft.easiestLevel,
+            onChanged: (v) => _apply(_draft.copyWith(easiestLevel: v)),
           ),
           SwitchListTile(
             title: const Text('Vocabulary'),

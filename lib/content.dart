@@ -172,6 +172,55 @@ class Sentence {
       );
 }
 
+/// A real-world task to attempt out loud.
+class Challenge {
+  const Challenge({
+    required this.id,
+    required this.level,
+    required this.title,
+    required this.goal,
+    required this.steps,
+    this.category,
+    this.setting,
+    this.stretch,
+  });
+
+  final String id;
+  final int level;
+  final String title;
+
+  /// What counts as having done it. Deliberately concrete — "order a hot
+  /// coffee, say the size, say it's to take away" is something you can
+  /// tell whether you managed; "practise ordering" is not.
+  final String goal;
+
+  /// The beats to hit, in order. Not a script: the phrases below are one
+  /// way to say each, and the point is to get through the steps somehow.
+  final List<String> steps;
+
+  final String? category;
+  final String? setting;
+
+  /// A harder version for when the plain one stops being work.
+  final String? stretch;
+
+  static Challenge fromRow(Map<String, Object?> r) => Challenge(
+        id: r['id']! as String,
+        level: r['level']! as int,
+        title: r['title']! as String,
+        goal: r['goal']! as String,
+        steps: _strings(r['steps']),
+        category: r['category'] as String?,
+        setting: r['setting'] as String?,
+        stretch: r['stretch'] as String?,
+      );
+}
+
+class ChallengePhrase {
+  const ChallengePhrase(this.jp, this.en);
+  final String jp, en;
+}
+
 List<String> _strings(Object? raw) {
   if (raw is! String || raw.isEmpty) return const [];
   final decoded = jsonDecode(raw);
@@ -242,11 +291,13 @@ class ContentDb {
   /// Ordered by the dictionary's own "common" flag and then by level, so
   /// the first words introduced are the ones actually worth knowing
   /// first — a list ordered by id introduces 作法 before 私.
-  Future<List<Word>> words({int minLevel = 3, int? limit}) async {
+  Future<List<Word>> words({int easiestLevel = 5, int? limit}) async {
     final rows = await _db.query(
       'word',
-      where: 'level >= ?',
-      whereArgs: [minLevel],
+      // `<=` not `>=`: the numbers run backwards to the names, so the
+      // easiest level included is the highest number.
+      where: 'level <= ?',
+      whereArgs: [easiestLevel],
       orderBy: 'level DESC, common DESC, id ASC',
       limit: limit,
     );
@@ -274,11 +325,13 @@ class ContentDb {
 
   // ------------------------------------------------------------- kanji
 
-  Future<List<Kanji>> kanji({int minLevel = 3, int? limit}) async {
+  Future<List<Kanji>> kanji({int easiestLevel = 5, int? limit}) async {
     final rows = await _db.query(
       'kanji',
-      where: 'level >= ?',
-      whereArgs: [minLevel],
+      // `<=` not `>=`: the numbers run backwards to the names, so the
+      // easiest level included is the highest number.
+      where: 'level <= ?',
+      whereArgs: [easiestLevel],
       orderBy: 'level DESC, COALESCE(freq, 9999) ASC',
       limit: limit,
     );
@@ -304,11 +357,13 @@ class ContentDb {
 
   // ----------------------------------------------------------- grammar
 
-  Future<List<GrammarPoint>> grammar({int minLevel = 3}) async {
+  Future<List<GrammarPoint>> grammar({int easiestLevel = 5}) async {
     final rows = await _db.query(
       'grammar',
-      where: 'level >= ?',
-      whereArgs: [minLevel],
+      // `<=` not `>=`: the numbers run backwards to the names, so the
+      // easiest level included is the highest number.
+      where: 'level <= ?',
+      whereArgs: [easiestLevel],
       orderBy: 'level DESC, category ASC, id ASC',
     );
     return [for (final r in rows) GrammarPoint.fromRow(r)];
@@ -349,6 +404,78 @@ class ContentDb {
     return [for (final r in rows) Sentence.fromRow(r)];
   }
 
+  // -------------------------------------------------------- challenges
+
+  /// Every challenge, with the deck words each is built from.
+  ///
+  /// Loaded whole because the daily pick has to score all of them against
+  /// the deck, and there are fifty — cheaper as one query than as fifty.
+  Future<List<({Challenge challenge, List<int> wordIds})>>
+      challenges() async {
+    final rows = await _db.query('challenge', orderBy: 'ord ASC');
+    final links = await _db.query('challenge_word');
+    final byChallenge = <String, List<int>>{};
+    for (final l in links) {
+      byChallenge
+          .putIfAbsent(l['challenge_id']! as String, () => [])
+          .add(l['word_id']! as int);
+    }
+    return [
+      for (final r in rows)
+        (
+          challenge: Challenge.fromRow(r),
+          wordIds: byChallenge[r['id']] ?? const [],
+        ),
+    ];
+  }
+
+  Future<Challenge?> challengeById(String id) async {
+    final rows =
+        await _db.query('challenge', where: 'id = ?', whereArgs: [id]);
+    return rows.isEmpty ? null : Challenge.fromRow(rows.first);
+  }
+
+  Future<List<ChallengePhrase>> challengePhrases(String id) async {
+    final rows = await _db.query('challenge_phrase',
+        where: 'challenge_id = ?', whereArgs: [id], orderBy: 'ord ASC');
+    return [
+      for (final r in rows)
+        ChallengePhrase(r['jp']! as String, r['en']! as String),
+    ];
+  }
+
+  Future<List<Word>> challengeWords(String id) async {
+    final rows = await _db.rawQuery('''
+      SELECT w.* FROM word w
+      JOIN challenge_word cw ON cw.word_id = w.id
+      WHERE cw.challenge_id = ?
+      ORDER BY w.level DESC, w.id ASC
+    ''', [id]);
+    return [for (final r in rows) Word.fromRow(r)];
+  }
+
+  Future<List<GrammarPoint>> challengeGrammar(String id) async {
+    final rows = await _db.rawQuery('''
+      SELECT g.* FROM grammar g
+      JOIN challenge_grammar cg ON cg.grammar_id = g.id
+      WHERE cg.challenge_id = ?
+      ORDER BY g.level DESC
+    ''', [id]);
+    return [for (final r in rows) GrammarPoint.fromRow(r)];
+  }
+
+  /// Words by id, for the "work these in" list.
+  Future<List<Word>> wordsByIds(List<int> ids) async {
+    if (ids.isEmpty) return const [];
+    final marks = List.filled(ids.length, '?').join(',');
+    final rows =
+        await _db.rawQuery('SELECT * FROM word WHERE id IN ($marks)', ids);
+    final byId = {for (final r in rows) r['id']! as int: Word.fromRow(r)};
+    // Returned in the order asked for: the caller ranked them, and a
+    // SQL IN clause does not preserve that.
+    return [for (final id in ids) if (byId[id] != null) byId[id]!];
+  }
+
   Future<Sentence?> sentenceById(int id) async {
     final rows = await _db.query('sentence', where: 'id = ?', whereArgs: [id]);
     return rows.isEmpty ? null : Sentence.fromRow(rows.first);
@@ -356,13 +483,14 @@ class ContentDb {
 
   /// Sentences graded for reading, listening and speaking practice.
   ///
-  /// [minLevel] filters by the hardest kanji in the sentence, so asking
-  /// for 4 gets sentences whose every character is N5 or N4. Sentences
-  /// above N3 are excluded unless [includeAboveGrade], because a reading
-  /// exercise full of characters you have not met is not practice, it is
-  /// a lookup session.
+  /// [hardestLevel] is a difficulty ceiling, and is the opposite
+  /// comparison to the deck scope above: asking for 4 gets sentences
+  /// whose every character is N5 or N4, and asking for 3 allows N3 too.
+  /// Sentences above N3 are excluded unless [includeAboveGrade], because
+  /// a reading exercise full of characters you have not met is not
+  /// practice, it is a lookup session.
   Future<List<Sentence>> practiceSentences({
-    int minLevel = 3,
+    int hardestLevel = 3,
     int maxChars = 60,
     int limit = 40,
     bool includeAboveGrade = false,
@@ -374,7 +502,7 @@ class ContentDb {
         AND (level >= ? ${includeAboveGrade ? 'OR level = 0' : ''})
       ORDER BY (id * 2654435761) % 1000003, id
       LIMIT ? OFFSET ?
-    ''', [maxChars, minLevel, limit, seed * limit]);
+    ''', [maxChars, hardestLevel, limit, seed * limit]);
     return [for (final r in rows) Sentence.fromRow(r)];
   }
 }

@@ -1,0 +1,842 @@
+[
+  {
+    "id": "order_coffee", "level": 5, "category": "Eating and drinking",
+    "title": "Order a coffee",
+    "setting": "At a café counter",
+    "goal": "Order a hot coffee, say what size you want, and say whether it is to take away.",
+    "steps": [
+      "Say what you want",
+      "Say the size",
+      "Say take-away or eat-in",
+      "Thank them"
+    ],
+    "phrases": [
+      {"jp": "ホットコーヒーをください。", "en": "A hot coffee, please."},
+      {"jp": "Mサイズでお願いします。", "en": "A medium, please."},
+      {"jp": "持ち帰りでお願いします。", "en": "To take away, please."},
+      {"jp": "ここで飲みます。", "en": "I'll drink it here."},
+      {"jp": "ありがとうございます。", "en": "Thank you."}
+    ],
+    "vocab": ["コーヒー", "熱い", "冷たい", "大きい", "小さい"],
+    "grammar": ["n5_te_kudasai"],
+    "stretch": "Do it again, but ask whether they have soy milk: 豆乳はありますか。"
+  },
+  {
+    "id": "order_restaurant", "level": 5, "category": "Eating and drinking",
+    "title": "Order a meal",
+    "setting": "At a small restaurant",
+    "goal": "Get a table for two, order one dish and a drink, and ask for the bill.",
+    "steps": ["Say how many people", "Order a dish", "Order a drink", "Ask for the bill"],
+    "phrases": [
+      {"jp": "二人です。", "en": "Two people."},
+      {"jp": "これをください。", "en": "This one, please."},
+      {"jp": "お水をお願いします。", "en": "Water, please."},
+      {"jp": "お会計をお願いします。", "en": "The bill, please."}
+    ],
+    "vocab": ["水", "料理", "飲む", "食べる", "店"],
+    "grammar": ["n5_te_kudasai"],
+    "stretch": "Ask what the recommendation is: おすすめは何ですか。"
+  },
+  {
+    "id": "dietary_needs", "level": 3, "category": "Eating and drinking",
+    "title": "Explain what you can't eat",
+    "setting": "Ordering, with something you must avoid",
+    "goal": "Say you cannot eat a particular thing, ask whether a dish contains it, and ask for it left out.",
+    "steps": ["Say what you can't eat", "Ask whether the dish has it", "Ask for it to be left out"],
+    "phrases": [
+      {"jp": "卵が食べられません。", "en": "I can't eat eggs."},
+      {"jp": "これに卵は入っていますか。", "en": "Does this contain egg?"},
+      {"jp": "抜きにしてもらえますか。", "en": "Could you leave it out?"},
+      {"jp": "アレルギーがあるんです。", "en": "It's because I have an allergy."}
+    ],
+    "vocab": ["卵", "肉", "魚", "入る"],
+    "grammar": ["n3_nuki"],
+    "stretch": "Explain the consequence: 食べると具合が悪くなります。"
+  },
+  {
+    "id": "give_directions", "level": 4, "category": "Getting around",
+    "title": "Give someone directions",
+    "setting": "A stranger stops you in the street",
+    "goal": "Direct someone to the station: straight on, turn at a landmark, and say roughly how long it takes.",
+    "steps": ["Straight on", "Turn left or right at a landmark", "Say how far or how long", "Check they understood"],
+    "phrases": [
+      {"jp": "この道をまっすぐ行ってください。", "en": "Go straight along this road."},
+      {"jp": "二つ目の角を右に曲がってください。", "en": "Turn right at the second corner."},
+      {"jp": "コンビニの前を左です。", "en": "Left in front of the convenience store."},
+      {"jp": "歩いて五分ぐらいです。", "en": "It's about five minutes on foot."},
+      {"jp": "分かりますか。", "en": "Does that make sense?"}
+    ],
+    "vocab": ["道", "右", "左", "角", "駅", "前"],
+    "grammar": ["n5_te_kudasai", "n3_kurai_gurai"],
+    "stretch": "Add a landmark you can't miss: 大きい銀行が見えたら、その隣です。"
+  },
+  {
+    "id": "ask_directions", "level": 5, "category": "Getting around",
+    "title": "Ask the way",
+    "setting": "You are lost",
+    "goal": "Stop someone politely, ask where something is, and thank them.",
+    "steps": ["Get their attention", "Ask where it is", "Ask how long it takes", "Thank them"],
+    "phrases": [
+      {"jp": "すみません。", "en": "Excuse me."},
+      {"jp": "駅はどこですか。", "en": "Where is the station?"},
+      {"jp": "ここから遠いですか。", "en": "Is it far from here?"},
+      {"jp": "どうもありがとうございました。", "en": "Thank you very much."}
+    ],
+    "vocab": ["駅", "遠い", "近い", "場所"],
+    "grammar": [],
+    "stretch": "Ask them to repeat it more slowly: もう一度ゆっくりお願いします。"
+  },
+  {
+    "id": "buy_ticket", "level": 4, "category": "Getting around",
+    "title": "Buy a train ticket",
+    "setting": "At a station window",
+    "goal": "Buy a ticket to somewhere, ask which platform, and ask what time the next one leaves.",
+    "steps": ["Say where you're going", "Ask the price", "Ask the platform", "Ask the next departure"],
+    "phrases": [
+      {"jp": "東京まで一枚お願いします。", "en": "One to Tokyo, please."},
+      {"jp": "いくらですか。", "en": "How much is it?"},
+      {"jp": "何番線ですか。", "en": "Which platform?"},
+      {"jp": "次の電車は何時ですか。", "en": "What time is the next train?"}
+    ],
+    "vocab": ["電車", "切符", "時間", "次"],
+    "grammar": [],
+    "stretch": "Ask whether you need to change: 乗り換えが必要ですか。"
+  },
+  {
+    "id": "missed_train", "level": 3, "category": "Getting around",
+    "title": "You missed the last train",
+    "setting": "A station, late at night",
+    "goal": "Explain what happened, ask what your options are, and ask for the nearest hotel.",
+    "steps": ["Say you missed it", "Ask what to do", "Ask for the nearest hotel"],
+    "phrases": [
+      {"jp": "終電に乗り遅れてしまいました。", "en": "I've gone and missed the last train."},
+      {"jp": "どうすればいいですか。", "en": "What should I do?"},
+      {"jp": "近くにホテルはありますか。", "en": "Is there a hotel nearby?"},
+      {"jp": "タクシーだといくらぐらいかかりますか。", "en": "Roughly how much would a taxi cost?"}
+    ],
+    "vocab": ["電車", "近く", "乗る"],
+    "grammar": ["n3_te_shimau", "n3_ba_ii"],
+    "stretch": "Say it was your own fault: 寝てしまったせいです。"
+  },
+  {
+    "id": "taxi", "level": 4, "category": "Getting around",
+    "title": "Take a taxi",
+    "setting": "In a taxi",
+    "goal": "Give a destination, ask how long it will take, and ask to be let out.",
+    "steps": ["Give the destination", "Ask how long", "Ask to stop here"],
+    "phrases": [
+      {"jp": "この住所までお願いします。", "en": "To this address, please."},
+      {"jp": "どのぐらいかかりますか。", "en": "How long will it take?"},
+      {"jp": "ここで止めてください。", "en": "Please stop here."},
+      {"jp": "急いでいます。", "en": "I'm in a hurry."}
+    ],
+    "vocab": ["時間", "住所", "止まる"],
+    "grammar": ["n5_te_kudasai"],
+    "stretch": "Ask them to take the faster route: 早い道で行ってもらえますか。"
+  },
+  {
+    "id": "shop_size", "level": 4, "category": "Shopping",
+    "title": "Try something on",
+    "setting": "A clothes shop",
+    "goal": "Ask to try something on, ask for another size, and say whether you'll take it.",
+    "steps": ["Ask to try it on", "Ask for a different size", "Say yes or no"],
+    "phrases": [
+      {"jp": "試着してもいいですか。", "en": "May I try this on?"},
+      {"jp": "もう少し大きいのはありますか。", "en": "Do you have a slightly bigger one?"},
+      {"jp": "これにします。", "en": "I'll take this one."},
+      {"jp": "また来ます。", "en": "I'll come back."}
+    ],
+    "vocab": ["大きい", "小さい", "服", "買う"],
+    "grammar": ["n5_te_mo_ii", "n4_koto_ni_suru"],
+    "stretch": "Ask if it comes in another colour: 他の色はありますか。"
+  },
+  {
+    "id": "return_item", "level": 3, "category": "Shopping",
+    "title": "Return something",
+    "setting": "A shop counter, with a receipt",
+    "goal": "Say what is wrong with it, ask to return or exchange it, and say which you would prefer.",
+    "steps": ["Say what's wrong", "Ask to return or exchange", "State your preference"],
+    "phrases": [
+      {"jp": "昨日これを買ったんですが、壊れていました。", "en": "I bought this yesterday, but it was broken."},
+      {"jp": "返品できますか。", "en": "Can I return it?"},
+      {"jp": "交換してもらえませんか。", "en": "Could you exchange it?"},
+      {"jp": "レシートはこちらです。", "en": "Here's the receipt."}
+    ],
+    "vocab": ["買う", "昨日", "壊れる"],
+    "grammar": ["n5_koto_ga_dekiru"],
+    "stretch": "Say you'd rather have the money back: 返金のほうがありがたいです。"
+  },
+  {
+    "id": "convenience_store", "level": 5, "category": "Shopping",
+    "title": "Pay at a convenience store",
+    "setting": "A konbini till",
+    "goal": "Decline a bag, say you'll pay by card, and decline the receipt.",
+    "steps": ["Decline a bag", "Say how you're paying", "Decline the receipt"],
+    "phrases": [
+      {"jp": "袋はいりません。", "en": "I don't need a bag."},
+      {"jp": "カードでお願いします。", "en": "By card, please."},
+      {"jp": "レシートは大丈夫です。", "en": "I'm fine without the receipt."},
+      {"jp": "温めてください。", "en": "Please heat it up."}
+    ],
+    "vocab": ["店", "買う", "お金"],
+    "grammar": ["n5_te_kudasai"],
+    "stretch": "Ask for chopsticks and a spoon: お箸とスプーンをください。"
+  },
+  {
+    "id": "haircut", "level": 3, "category": "Services",
+    "title": "Get a haircut",
+    "setting": "A barber or salon",
+    "goal": "Say how much to cut, say what to leave alone, and say when to stop.",
+    "steps": ["Say how much off", "Say what to leave", "Say that's enough"],
+    "phrases": [
+      {"jp": "全体的に短くしてください。", "en": "Shorter all over, please."},
+      {"jp": "前髪は切らないでください。", "en": "Please don't cut the fringe."},
+      {"jp": "これぐらいでお願いします。", "en": "About this much, please."},
+      {"jp": "そのぐらいで大丈夫です。", "en": "That's about right."}
+    ],
+    "vocab": ["短い", "長い", "切る"],
+    "grammar": ["n5_naide_kudasai", "n3_kurai_gurai"],
+    "stretch": "Ask them to leave it long enough to tie back: 結べるぐらいの長さで残してください。"
+  },
+  {
+    "id": "post_office", "level": 4, "category": "Services",
+    "title": "Send a parcel",
+    "setting": "A post office",
+    "goal": "Say where it's going, ask about speed and cost, and say it's fragile.",
+    "steps": ["Say the destination", "Ask cost and time", "Say it's fragile"],
+    "phrases": [
+      {"jp": "これをイギリスまで送りたいです。", "en": "I'd like to send this to the UK."},
+      {"jp": "一番安い方法でお願いします。", "en": "The cheapest way, please."},
+      {"jp": "どのぐらいで着きますか。", "en": "How long until it arrives?"},
+      {"jp": "割れ物が入っています。", "en": "There's something breakable inside."}
+    ],
+    "vocab": ["送る", "安い", "高い", "着く"],
+    "grammar": ["n5_tai"],
+    "stretch": "Ask whether it can be tracked: 追跡できますか。"
+  },
+  {
+    "id": "bank_account", "level": 3, "category": "Services",
+    "title": "Sort something out at the bank",
+    "setting": "A bank counter",
+    "goal": "Say what you want to do, say you don't have a document, and ask what to bring.",
+    "steps": ["Say what you want", "Say what's missing", "Ask what to bring"],
+    "phrases": [
+      {"jp": "口座を開きたいんですが。", "en": "I'd like to open an account."},
+      {"jp": "今、印鑑を持っていないんです。", "en": "I don't have my seal with me."},
+      {"jp": "何を持ってくればいいですか。", "en": "What should I bring?"},
+      {"jp": "また来ます。", "en": "I'll come back."}
+    ],
+    "vocab": ["お金", "持つ", "来る"],
+    "grammar": ["n3_ba_ii", "n5_tai"],
+    "stretch": "Ask whether an appointment is needed: 予約が必要ですか。"
+  },
+  {
+    "id": "doctor", "level": 3, "category": "Health",
+    "title": "Describe a symptom",
+    "setting": "A clinic",
+    "goal": "Say what hurts, say since when, and say what makes it worse.",
+    "steps": ["Say what hurts", "Say since when", "Say what makes it worse"],
+    "phrases": [
+      {"jp": "お腹が痛いんです。", "en": "My stomach hurts."},
+      {"jp": "三日前からです。", "en": "Since three days ago."},
+      {"jp": "食べた後、ひどくなります。", "en": "It gets worse after I eat."},
+      {"jp": "熱もあります。", "en": "I have a fever too."}
+    ],
+    "vocab": ["痛い", "頭", "病気", "薬"],
+    "grammar": ["n3_ato_de", "n4_you_ni_naru"],
+    "stretch": "Say you're on other medication: 今、別の薬を飲んでいます。"
+  },
+  {
+    "id": "pharmacy", "level": 4, "category": "Health",
+    "title": "Buy medicine",
+    "setting": "A pharmacy",
+    "goal": "Say your symptom, ask what to take, and ask how often.",
+    "steps": ["Say the symptom", "Ask what's suitable", "Ask how to take it"],
+    "phrases": [
+      {"jp": "風邪をひきました。", "en": "I've caught a cold."},
+      {"jp": "何かいい薬はありますか。", "en": "Is there a good medicine for it?"},
+      {"jp": "一日に何回飲みますか。", "en": "How many times a day do I take it?"},
+      {"jp": "眠くなりますか。", "en": "Will it make me sleepy?"}
+    ],
+    "vocab": ["薬", "飲む", "日"],
+    "grammar": ["n4_you_ni_naru"],
+    "stretch": "Ask for one that won't make you drowsy: 眠くならないものをお願いします。"
+  },
+  {
+    "id": "self_intro", "level": 5, "category": "Meeting people",
+    "title": "Introduce yourself",
+    "setting": "Meeting someone for the first time",
+    "goal": "Give your name, where you're from, what you do, and one thing about you.",
+    "steps": ["Name", "Where you're from", "What you do", "One personal detail"],
+    "phrases": [
+      {"jp": "はじめまして。", "en": "Nice to meet you."},
+      {"jp": "アルと申します。", "en": "My name is Al."},
+      {"jp": "イギリスから来ました。", "en": "I'm from the UK."},
+      {"jp": "ソフトウェアを作っています。", "en": "I make software."},
+      {"jp": "よろしくお願いします。", "en": "Pleased to meet you."}
+    ],
+    "vocab": ["名前", "国", "仕事", "作る"],
+    "grammar": [],
+    "stretch": "Add how long you've been studying: 日本語を二年勉強しています。"
+  },
+  {
+    "id": "small_talk_weather", "level": 5, "category": "Meeting people",
+    "title": "Make small talk about the weather",
+    "setting": "Waiting with someone",
+    "goal": "Comment on the weather, agree with a reply, and say what tomorrow will be like.",
+    "steps": ["Comment on today", "Agree", "Say what tomorrow will be"],
+    "phrases": [
+      {"jp": "今日は暑いですね。", "en": "It's hot today, isn't it?"},
+      {"jp": "本当にそうですね。", "en": "It really is."},
+      {"jp": "明日は雨が降るそうです。", "en": "I hear it's going to rain tomorrow."},
+      {"jp": "傘を持ってきました。", "en": "I brought an umbrella."}
+    ],
+    "vocab": ["今日", "明日", "雨", "暑い", "寒い"],
+    "grammar": ["n4_sou_da_hearsay"],
+    "stretch": "Complain about it properly: 毎日暑くて、たまらないですね。"
+  },
+  {
+    "id": "exchange_contacts", "level": 4, "category": "Meeting people",
+    "title": "Swap contact details",
+    "setting": "The end of a conversation with someone new",
+    "goal": "Ask for their LINE, offer yours, and suggest meeting again.",
+    "steps": ["Ask for their contact", "Offer yours", "Suggest meeting again"],
+    "phrases": [
+      {"jp": "ラインを交換しませんか。", "en": "Shall we swap LINE?"},
+      {"jp": "私のQRコードです。", "en": "Here's my QR code."},
+      {"jp": "また今度、一緒にご飯でも。", "en": "Let's get food together sometime."},
+      {"jp": "連絡しますね。", "en": "I'll be in touch."}
+    ],
+    "vocab": ["今度", "一緒", "会う"],
+    "grammar": [],
+    "stretch": "Pin down an actual time: 来週の土曜日はどうですか。"
+  },
+  {
+    "id": "decline_politely", "level": 3, "category": "Meeting people",
+    "title": "Turn something down politely",
+    "setting": "Someone invites you out and you can't go",
+    "goal": "Thank them, say you can't, give a reason, and leave the door open.",
+    "steps": ["Thank them", "Say you can't", "Give a reason", "Offer another time"],
+    "phrases": [
+      {"jp": "誘ってくれてありがとう。", "en": "Thanks for inviting me."},
+      {"jp": "行きたいんですが、その日は用事があって。", "en": "I'd like to, but I have something on that day."},
+      {"jp": "せっかくですが、今回は遠慮します。", "en": "It's kind of you, but I'll pass this time."},
+      {"jp": "また誘ってください。", "en": "Please ask me again."}
+    ],
+    "vocab": ["行く", "日", "今度"],
+    "grammar": ["n5_tai", "n3_tame_ni"],
+    "stretch": "Soften it further: 行けたら行きたかったんですけど。"
+  },
+  {
+    "id": "apologise_late", "level": 4, "category": "Meeting people",
+    "title": "Apologise for being late",
+    "setting": "Arriving twenty minutes late",
+    "goal": "Apologise, explain why, and say you'll be careful next time.",
+    "steps": ["Apologise", "Explain", "Promise to do better"],
+    "phrases": [
+      {"jp": "遅れてすみません。", "en": "Sorry I'm late."},
+      {"jp": "電車が遅れてしまって。", "en": "The train was delayed."},
+      {"jp": "待たせてしまってすみません。", "en": "Sorry to have kept you waiting."},
+      {"jp": "次からは気をつけます。", "en": "I'll be careful from now on."}
+    ],
+    "vocab": ["遅い", "電車", "待つ"],
+    "grammar": ["n3_te_shimau", "n3_causative"],
+    "stretch": "Blame it properly: 事故のせいで、電車が止まっていたんです。"
+  },
+  {
+    "id": "phone_call", "level": 3, "category": "Work and study",
+    "title": "Make a phone call",
+    "setting": "Ringing an office",
+    "goal": "Say who you are, ask for someone, and leave a message.",
+    "steps": ["Say who you are", "Ask for the person", "Leave a message"],
+    "phrases": [
+      {"jp": "お忙しいところ失礼します。", "en": "Sorry to disturb you."},
+      {"jp": "田中さんはいらっしゃいますか。", "en": "Is Mr Tanaka there?"},
+      {"jp": "では、伝言をお願いできますか。", "en": "Could I leave a message, then?"},
+      {"jp": "後でかけ直します。", "en": "I'll call back later."}
+    ],
+    "vocab": ["電話", "後", "人"],
+    "grammar": ["n3_keigo_sonkei", "n3_keigo_kenjou"],
+    "stretch": "Ask when they'll be back: 何時ごろお戻りになりますか。"
+  },
+  {
+    "id": "ask_for_help_work", "level": 3, "category": "Work and study",
+    "title": "Ask a colleague for help",
+    "setting": "At work, stuck on something",
+    "goal": "Check they have a moment, explain what's wrong, and ask for help.",
+    "steps": ["Check they're free", "Explain the problem", "Ask for help", "Thank them"],
+    "phrases": [
+      {"jp": "今、少しよろしいですか。", "en": "Do you have a moment?"},
+      {"jp": "ここがどうしても分からなくて。", "en": "I just can't work this bit out."},
+      {"jp": "教えていただけませんか。", "en": "Could you show me?"},
+      {"jp": "助かりました。", "en": "That was a big help."}
+    ],
+    "vocab": ["分かる", "教える", "今", "少し"],
+    "grammar": ["n3_keigo_kenjou"],
+    "stretch": "Say what you already tried: 自分で調べてみたんですが、分かりませんでした。"
+  },
+  {
+    "id": "disagree_politely", "level": 3, "category": "Work and study",
+    "title": "Disagree without being rude",
+    "setting": "A meeting where you see it differently",
+    "goal": "Acknowledge their point, say where you differ, and suggest an alternative.",
+    "steps": ["Acknowledge them", "Say you see it differently", "Suggest another way"],
+    "phrases": [
+      {"jp": "おっしゃることは分かります。", "en": "I see what you mean."},
+      {"jp": "ただ、少し違う考えもあります。", "en": "Only, there's a slightly different view too."},
+      {"jp": "こうしたほうがいいと思います。", "en": "I think it would be better to do it this way."},
+      {"jp": "いかがでしょうか。", "en": "What do you think?"}
+    ],
+    "vocab": ["考える", "思う", "違う"],
+    "grammar": ["n3_hou_ga_ii", "n3_to_iu_yori"],
+    "stretch": "Give the reason: 時間がかかる反面、確実だからです。"
+  },
+  {
+    "id": "job_interview", "level": 3, "category": "Work and study",
+    "title": "Answer an interview question",
+    "setting": "A job interview",
+    "goal": "Say what you've done, why you want this, and one strength.",
+    "steps": ["What you've done", "Why this job", "A strength"],
+    "phrases": [
+      {"jp": "五年間、ソフトウェアの仕事をしてきました。", "en": "I've worked in software for five years."},
+      {"jp": "御社の仕事に興味があります。", "en": "I'm interested in your company's work."},
+      {"jp": "最後までやりきるところが長所だと思います。", "en": "I think my strength is seeing things through."},
+      {"jp": "よろしくお願いいたします。", "en": "Thank you for your consideration."}
+    ],
+    "vocab": ["仕事", "会社", "年", "思う"],
+    "grammar": ["n3_te_iku_kuru", "n3_ni_totte"],
+    "stretch": "Answer the weakness question: 考えすぎてしまうところが短所です。"
+  },
+  {
+    "id": "ask_repeat", "level": 5, "category": "Coping",
+    "title": "Say you didn't understand",
+    "setting": "Someone said something too fast",
+    "goal": "Say you didn't catch it, ask them to slow down, and ask what a word means.",
+    "steps": ["Say you didn't catch it", "Ask for slower", "Ask what a word means"],
+    "phrases": [
+      {"jp": "すみません、聞き取れませんでした。", "en": "Sorry, I didn't catch that."},
+      {"jp": "もう少しゆっくりお願いします。", "en": "A bit more slowly, please."},
+      {"jp": "それはどういう意味ですか。", "en": "What does that mean?"},
+      {"jp": "書いてもらえますか。", "en": "Could you write it down?"}
+    ],
+    "vocab": ["聞く", "意味", "書く", "言う"],
+    "grammar": [],
+    "stretch": "Ask for it in different words: 別の言い方で言ってもらえますか。"
+  },
+  {
+    "id": "explain_japanese_level", "level": 4, "category": "Coping",
+    "title": "Explain your Japanese",
+    "setting": "Someone assumes you're fluent, or assumes you're not",
+    "goal": "Say how long you've studied, what you find hard, and ask them to keep going in Japanese.",
+    "steps": ["How long you've studied", "What's hard", "Ask them to stay in Japanese"],
+    "phrases": [
+      {"jp": "日本語を勉強して二年になります。", "en": "It's been two years since I started Japanese."},
+      {"jp": "話すのはまだ難しいです。", "en": "Speaking is still hard."},
+      {"jp": "漢字が一番苦手です。", "en": "Kanji is what I'm worst at."},
+      {"jp": "日本語で話してもらえると嬉しいです。", "en": "I'd be glad if you spoke Japanese with me."}
+    ],
+    "vocab": ["勉強", "難しい", "話す", "漢字"],
+    "grammar": ["n4_you_ni_naru"],
+    "stretch": "Ask them to correct you: 間違えたら直してください。"
+  },
+  {
+    "id": "lost_item", "level": 3, "category": "Coping",
+    "title": "Report something lost",
+    "setting": "A lost property desk",
+    "goal": "Say what you lost, describe it, and say where and when.",
+    "steps": ["Say what you lost", "Describe it", "Say where and when", "Leave contact details"],
+    "phrases": [
+      {"jp": "財布をなくしてしまいました。", "en": "I've lost my wallet."},
+      {"jp": "黒くて、小さいものです。", "en": "It's black and small."},
+      {"jp": "さっき、二番線に置き忘れたと思います。", "en": "I think I left it on platform two just now."},
+      {"jp": "見つかったら、連絡してもらえますか。", "en": "Could you contact me if it's found?"}
+    ],
+    "vocab": ["黒い", "小さい", "思う", "見つかる"],
+    "grammar": ["n3_te_shimau", "n3_bun_ni_wa"],
+    "stretch": "Say what was in it: 中にカードと現金が入っていました。"
+  },
+  {
+    "id": "emergency", "level": 4, "category": "Coping",
+    "title": "Get help in an emergency",
+    "setting": "Something has gone badly wrong",
+    "goal": "Call for help, say what happened, and say where you are.",
+    "steps": ["Call for help", "Say what happened", "Say where you are"],
+    "phrases": [
+      {"jp": "助けてください。", "en": "Please help."},
+      {"jp": "事故がありました。", "en": "There's been an accident."},
+      {"jp": "救急車を呼んでください。", "en": "Please call an ambulance."},
+      {"jp": "駅の近くにいます。", "en": "I'm near the station."}
+    ],
+    "vocab": ["助ける", "近く", "呼ぶ", "事故"],
+    "grammar": ["n5_te_kudasai"],
+    "stretch": "Describe the person's state: 意識はありますが、動けないようです。"
+  },
+  {
+    "id": "complain_neighbour", "level": 3, "category": "Home",
+    "title": "Raise a problem with a neighbour",
+    "setting": "The flat next door is loud at night",
+    "goal": "Raise it without a fight: say what, say when, and ask for a change.",
+    "steps": ["Open gently", "Say what and when", "Ask for a change"],
+    "phrases": [
+      {"jp": "言いにくいんですが、少しお願いがあります。", "en": "This is awkward to say, but I have a request."},
+      {"jp": "夜、音が少し気になるんです。", "en": "The noise at night bothers me a little."},
+      {"jp": "十時以降は静かにしていただけると助かります。", "en": "It would help if it were quiet after ten."},
+      {"jp": "お互い様ですので。", "en": "It goes both ways, of course."}
+    ],
+    "vocab": ["夜", "音", "静か", "少し"],
+    "grammar": ["n3_nikui_yasui", "n3_ijou_wa"],
+    "stretch": "Concede something first: こちらもうるさい時があるかもしれませんが。"
+  },
+  {
+    "id": "rent_flat", "level": 3, "category": "Home",
+    "title": "Ask about a flat",
+    "setting": "An estate agent",
+    "goal": "Say what you're looking for, ask about cost and rules, and ask to view it.",
+    "steps": ["Say what you want", "Ask about cost", "Ask about rules", "Ask to view"],
+    "phrases": [
+      {"jp": "駅から近い部屋を探しています。", "en": "I'm looking for a place near the station."},
+      {"jp": "家賃のほかに何がかかりますか。", "en": "What costs are there besides the rent?"},
+      {"jp": "ペットは飼えますか。", "en": "Are pets allowed?"},
+      {"jp": "見学できますか。", "en": "Could I view it?"}
+    ],
+    "vocab": ["部屋", "近い", "探す", "お金"],
+    "grammar": ["n3_igai", "n5_koto_ga_dekiru"],
+    "stretch": "Ask about the guarantor requirement: 保証人が必要かどうか教えてください。"
+  },
+  {
+    "id": "broken_appliance", "level": 3, "category": "Home",
+    "title": "Report something broken",
+    "setting": "Ringing the landlord",
+    "goal": "Say what's broken, say since when, and ask when it can be fixed.",
+    "steps": ["Say what's broken", "Say since when", "Ask when it can be fixed"],
+    "phrases": [
+      {"jp": "お湯が出なくなりました。", "en": "The hot water has stopped working."},
+      {"jp": "昨日の夜からです。", "en": "Since last night."},
+      {"jp": "いつ直してもらえますか。", "en": "When could it be fixed?"},
+      {"jp": "できるだけ早くお願いします。", "en": "As soon as possible, please."}
+    ],
+    "vocab": ["出る", "昨日", "夜", "早い"],
+    "grammar": ["n4_you_ni_naru", "n3_bun_dake"],
+    "stretch": "Say what you already tried: スイッチは確認しましたが、変わりませんでした。"
+  },
+  {
+    "id": "describe_your_day", "level": 5, "category": "Talking about yourself",
+    "title": "Describe your day",
+    "setting": "Someone asks what you did today",
+    "goal": "Say three things you did, in order, with times.",
+    "steps": ["Morning", "Afternoon", "Evening"],
+    "phrases": [
+      {"jp": "朝、七時に起きました。", "en": "I got up at seven this morning."},
+      {"jp": "午後は仕事をしました。", "en": "I worked in the afternoon."},
+      {"jp": "それから、友達に会いました。", "en": "After that, I met a friend."},
+      {"jp": "今日は忙しかったです。", "en": "Today was busy."}
+    ],
+    "vocab": ["朝", "午後", "起きる", "会う", "友達"],
+    "grammar": ["n3_owari_ni", "n3_ato_de"],
+    "stretch": "Say what you'd rather have done: 本当は家で休みたかったです。"
+  },
+  {
+    "id": "describe_hometown", "level": 4, "category": "Talking about yourself",
+    "title": "Describe where you're from",
+    "setting": "Someone asks about your home town",
+    "goal": "Say where it is, what it's like, and one thing it's known for.",
+    "steps": ["Where it is", "What it's like", "What it's known for"],
+    "phrases": [
+      {"jp": "ロンドンの近くの町です。", "en": "It's a town near London."},
+      {"jp": "あまり大きくありませんが、静かです。", "en": "It's not very big, but it's quiet."},
+      {"jp": "古い建物で有名です。", "en": "It's famous for its old buildings."},
+      {"jp": "ぜひ来てください。", "en": "Do come and visit."}
+    ],
+    "vocab": ["町", "古い", "静か", "有名"],
+    "grammar": ["n3_toshite"],
+    "stretch": "Compare it: 東京に比べて、ずっとのんびりしています。"
+  },
+  {
+    "id": "talk_about_hobby", "level": 4, "category": "Talking about yourself",
+    "title": "Talk about a hobby",
+    "setting": "Someone asks what you do for fun",
+    "goal": "Say what it is, how long you've done it, and why you like it.",
+    "steps": ["What it is", "How long", "Why you like it"],
+    "phrases": [
+      {"jp": "趣味はプログラミングです。", "en": "My hobby is programming."},
+      {"jp": "十年ぐらい続けています。", "en": "I've been doing it about ten years."},
+      {"jp": "作るのが楽しいからです。", "en": "Because making things is fun."},
+      {"jp": "週末によくやります。", "en": "I often do it at weekends."}
+    ],
+    "vocab": ["作る", "楽しい", "週末", "好き"],
+    "grammar": ["n3_tsuzukeru", "n3_kurai_gurai"],
+    "stretch": "Say how you got into it: 友達に誘われたのがきっかけです。"
+  },
+  {
+    "id": "opinion_on_film", "level": 3, "category": "Talking about yourself",
+    "title": "Give an opinion on something you watched",
+    "setting": "Talking about a film or show",
+    "goal": "Say what you thought, give a reason, and say who'd like it.",
+    "steps": ["What you thought", "Why", "Who'd like it"],
+    "phrases": [
+      {"jp": "思ったより面白かったです。", "en": "It was more interesting than I expected."},
+      {"jp": "話が分かりやすかったからだと思います。", "en": "I think it's because the story was easy to follow."},
+      {"jp": "子供でも楽しめると思います。", "en": "I think even children would enjoy it."},
+      {"jp": "おすすめです。", "en": "I recommend it."}
+    ],
+    "vocab": ["面白い", "思う", "話", "子供"],
+    "grammar": ["n3_nikui_yasui", "n3_sae"],
+    "stretch": "Qualify it: 面白いというより、考えさせられる映画でした。"
+  },
+  {
+    "id": "make_plans", "level": 4, "category": "Arranging things",
+    "title": "Make a plan with someone",
+    "setting": "Sorting out when to meet",
+    "goal": "Suggest a day, suggest a place and time, and confirm.",
+    "steps": ["Suggest a day", "Suggest place and time", "Confirm"],
+    "phrases": [
+      {"jp": "土曜日はどうですか。", "en": "How about Saturday?"},
+      {"jp": "駅の前で三時に会いましょう。", "en": "Let's meet in front of the station at three."},
+      {"jp": "もし遅れたら、連絡します。", "en": "If I'm late, I'll let you know."},
+      {"jp": "じゃあ、そうしましょう。", "en": "Right, let's do that."}
+    ],
+    "vocab": ["会う", "前", "時間", "連絡"],
+    "grammar": ["n3_bun_ni_wa"],
+    "stretch": "Offer an alternative: 土曜が無理なら、日曜でも大丈夫です。"
+  },
+  {
+    "id": "change_plans", "level": 3, "category": "Arranging things",
+    "title": "Change a plan at short notice",
+    "setting": "You can no longer make it",
+    "goal": "Apologise, explain, and propose a new time.",
+    "steps": ["Apologise", "Explain", "Propose a new time"],
+    "phrases": [
+      {"jp": "急で申し訳ないんですが。", "en": "I'm sorry for the short notice, but…"},
+      {"jp": "仕事が終わらなくて、行けなくなりました。", "en": "Work isn't finishing, so I can't come."},
+      {"jp": "来週に変更してもらえませんか。", "en": "Could we move it to next week?"},
+      {"jp": "本当にすみません。", "en": "I'm really sorry."}
+    ],
+    "vocab": ["仕事", "来週", "終わる", "行く"],
+    "grammar": ["n4_you_ni_naru", "n3_tame_ni"],
+    "stretch": "Offer to make it up: お詫びに、今度こちらがごちそうします。"
+  },
+  {
+    "id": "book_restaurant", "level": 4, "category": "Arranging things",
+    "title": "Book a table",
+    "setting": "Ringing a restaurant",
+    "goal": "Say when and how many, ask about a seat, and give your name.",
+    "steps": ["Say when and how many", "Ask about seating", "Give your name"],
+    "phrases": [
+      {"jp": "今週の金曜日、三人で予約したいんですが。", "en": "I'd like to book for three this Friday."},
+      {"jp": "七時からお願いします。", "en": "From seven, please."},
+      {"jp": "窓際の席はありますか。", "en": "Do you have a table by the window?"},
+      {"jp": "名前はアルです。", "en": "The name is Al."}
+    ],
+    "vocab": ["人", "時間", "名前", "席"],
+    "grammar": ["n5_tai"],
+    "stretch": "Mention a dietary need: 一人、肉が食べられない者がいます。"
+  },
+  {
+    "id": "hotel_checkin", "level": 4, "category": "Travel",
+    "title": "Check into a hotel",
+    "setting": "A hotel front desk",
+    "goal": "Give your booking, ask about breakfast and checkout, and ask to leave a bag.",
+    "steps": ["Give your booking", "Ask about breakfast", "Ask about checkout", "Ask to leave a bag"],
+    "phrases": [
+      {"jp": "予約したアルです。", "en": "I'm Al, I have a booking."},
+      {"jp": "朝ご飯は何時からですか。", "en": "What time does breakfast start?"},
+      {"jp": "チェックアウトは何時までですか。", "en": "Until what time is checkout?"},
+      {"jp": "荷物を預かってもらえますか。", "en": "Could you hold my bags?"}
+    ],
+    "vocab": ["朝", "時間", "荷物", "部屋"],
+    "grammar": [],
+    "stretch": "Ask for a quieter room: できれば静かな部屋をお願いできますか。"
+  },
+  {
+    "id": "tourist_info", "level": 4, "category": "Travel",
+    "title": "Ask what's worth seeing",
+    "setting": "A tourist information desk",
+    "goal": "Say how long you have, ask what's worth seeing, and ask how to get there.",
+    "steps": ["Say how long you have", "Ask what's worth seeing", "Ask how to get there"],
+    "phrases": [
+      {"jp": "今日は一日だけいます。", "en": "I'm only here for today."},
+      {"jp": "おすすめの場所はありますか。", "en": "Is there somewhere you'd recommend?"},
+      {"jp": "そこまでどうやって行きますか。", "en": "How do I get there?"},
+      {"jp": "地図をもらえますか。", "en": "Could I have a map?"}
+    ],
+    "vocab": ["今日", "場所", "行く", "地図"],
+    "grammar": [],
+    "stretch": "Narrow it down: 歩いて回れるところがいいんですが。"
+  },
+  {
+    "id": "onsen_rules", "level": 3, "category": "Travel",
+    "title": "Check the rules somewhere",
+    "setting": "An onsen, a temple, a museum",
+    "goal": "Ask whether something is allowed, ask what to do first, and confirm you understood.",
+    "steps": ["Ask if it's allowed", "Ask what to do first", "Confirm"],
+    "phrases": [
+      {"jp": "写真を撮ってもいいですか。", "en": "May I take photos?"},
+      {"jp": "靴はどこで脱ぎますか。", "en": "Where do I take my shoes off?"},
+      {"jp": "先に体を洗えばいいんですね。", "en": "So I wash first, is that right?"},
+      {"jp": "分かりました、ありがとうございます。", "en": "Understood, thank you."}
+    ],
+    "vocab": ["写真", "靴", "先", "洗う"],
+    "grammar": ["n5_te_mo_ii", "n3_ba_ii"],
+    "stretch": "Ask about a specific worry: 入れ墨があるんですが、大丈夫でしょうか。"
+  },
+  {
+    "id": "describe_person", "level": 4, "category": "Describing things",
+    "title": "Describe a person",
+    "setting": "Telling someone who to look for",
+    "goal": "Describe height, what they're wearing, and one distinguishing feature.",
+    "steps": ["Height and build", "Clothes", "One distinguishing feature"],
+    "phrases": [
+      {"jp": "背が高くて、髪が短い人です。", "en": "He's tall with short hair."},
+      {"jp": "青いシャツを着ています。", "en": "He's wearing a blue shirt."},
+      {"jp": "眼鏡をかけています。", "en": "He wears glasses."},
+      {"jp": "すぐ分かると思います。", "en": "I think you'll spot him straight away."}
+    ],
+    "vocab": ["高い", "短い", "青い", "人", "着る"],
+    "grammar": [],
+    "stretch": "Describe their manner: 静かそうに見えますが、よく話す人です。"
+  },
+  {
+    "id": "compare_two_things", "level": 3, "category": "Describing things",
+    "title": "Compare two options",
+    "setting": "Deciding between two things",
+    "goal": "State both, say which is better and why, and say the drawback.",
+    "steps": ["State both", "Say which is better", "Give the drawback"],
+    "phrases": [
+      {"jp": "こっちのほうが安いです。", "en": "This one's cheaper."},
+      {"jp": "でも、あっちのほうが長持ちしそうです。", "en": "But that one looks like it'll last longer."},
+      {"jp": "値段のわりに質がいいと思います。", "en": "I think the quality is good for the price."},
+      {"jp": "悩みますね。", "en": "It's a hard choice."}
+    ],
+    "vocab": ["安い", "高い", "質", "思う"],
+    "grammar": ["n3_wari_ni", "n3_hou_ga_ii", "n3_ni_kuraberu"],
+    "stretch": "Commit to one with a reason: 長く使うことを考えると、高いほうにします。"
+  },
+  {
+    "id": "explain_how_to", "level": 3, "category": "Describing things",
+    "title": "Explain how to do something",
+    "setting": "Teaching someone a simple process",
+    "goal": "Give three ordered steps and one warning.",
+    "steps": ["First step", "Next step", "Last step", "A warning"],
+    "phrases": [
+      {"jp": "まず、ボタンを押してください。", "en": "First, press the button."},
+      {"jp": "次に、番号を入れます。", "en": "Next, enter the number."},
+      {"jp": "最後に、確認を押せば終わりです。", "en": "Finally, press confirm and you're done."},
+      {"jp": "途中で止めないように気をつけてください。", "en": "Be careful not to stop half way."}
+    ],
+    "vocab": ["押す", "入れる", "最後", "止める"],
+    "grammar": ["n3_you_ni_purpose", "n3_kata"],
+    "stretch": "Add what happens if it goes wrong: 失敗したら、最初からやり直すことになります。"
+  },
+  {
+    "id": "tell_a_story", "level": 3, "category": "Describing things",
+    "title": "Tell a short story",
+    "setting": "Something that happened to you",
+    "goal": "Set the scene, say what happened, say how it ended and how you felt.",
+    "steps": ["Set the scene", "What happened", "How it ended", "How you felt"],
+    "phrases": [
+      {"jp": "先週、電車に乗っていたときのことなんですが。", "en": "This was last week, when I was on the train."},
+      {"jp": "急に、知らない人に話しかけられました。", "en": "Suddenly a stranger spoke to me."},
+      {"jp": "結局、一時間ぐらい話してしまいました。", "en": "In the end we talked for about an hour."},
+      {"jp": "びっくりしましたが、嬉しかったです。", "en": "I was surprised, but glad."}
+    ],
+    "vocab": ["先週", "急", "話す", "知る"],
+    "grammar": ["n3_passive", "n3_te_shimau", "n3_totan"],
+    "stretch": "Add a twist: 話してみたら、同じ町の出身だと分かりました。"
+  },
+  {
+    "id": "thank_properly", "level": 4, "category": "Meeting people",
+    "title": "Thank someone properly",
+    "setting": "Someone went out of their way for you",
+    "goal": "Thank them, say what it meant, and offer to return the favour.",
+    "steps": ["Thank them", "Say what it meant", "Offer to return it"],
+    "phrases": [
+      {"jp": "本当にありがとうございました。", "en": "Thank you very much indeed."},
+      {"jp": "おかげで助かりました。", "en": "It really helped, thanks to you."},
+      {"jp": "何かお返しをさせてください。", "en": "Please let me do something in return."},
+      {"jp": "今度はこちらが手伝います。", "en": "Next time I'll help you."}
+    ],
+    "vocab": ["助ける", "今度", "手伝う"],
+    "grammar": ["n3_okage_de", "n3_causative"],
+    "stretch": "Be specific about what it meant: 締め切りに間に合ったのは、あなたのおかげです。"
+  },
+  {
+    "id": "ask_favour", "level": 3, "category": "Meeting people",
+    "title": "Ask a favour",
+    "setting": "You need someone to do something for you",
+    "goal": "Soften the approach, ask clearly, and give them an out.",
+    "steps": ["Soften it", "Ask clearly", "Give them an out"],
+    "phrases": [
+      {"jp": "ちょっとお願いがあるんですが。", "en": "I have a small favour to ask."},
+      {"jp": "もし良かったら、手伝ってもらえませんか。", "en": "If you don't mind, could you help me?"},
+      {"jp": "忙しかったら、断ってくださいね。", "en": "If you're busy, do say no."},
+      {"jp": "無理はしないでください。", "en": "Please don't put yourself out."}
+    ],
+    "vocab": ["手伝う", "忙しい", "無理"],
+    "grammar": ["n3_bun_ni_wa", "n5_naide_kudasai"],
+    "stretch": "Say why you're asking them: あなたが一番詳しいと思ったので。"
+  },
+  {
+    "id": "haggle_market", "level": 3, "category": "Shopping",
+    "title": "Ask for a better price",
+    "setting": "A market stall or second-hand shop",
+    "goal": "Show interest, ask whether they can do better, and decide.",
+    "steps": ["Show interest", "Ask about the price", "Decide"],
+    "phrases": [
+      {"jp": "これ、いいですね。", "en": "This is nice."},
+      {"jp": "もう少し安くなりませんか。", "en": "Could it be a little cheaper?"},
+      {"jp": "二つ買ったら、どうですか。", "en": "What if I buy two?"},
+      {"jp": "じゃあ、これにします。", "en": "All right, I'll take it."}
+    ],
+    "vocab": ["安い", "買う", "二つ"],
+    "grammar": ["n4_koto_ni_suru"],
+    "stretch": "Walk away gracefully: 少し考えてから、また来ます。"
+  },
+  {
+    "id": "recommend_something", "level": 4, "category": "Describing things",
+    "title": "Recommend something",
+    "setting": "Someone asks what you'd suggest",
+    "goal": "Name it, say why, and say who it suits.",
+    "steps": ["Name it", "Say why", "Say who it suits"],
+    "phrases": [
+      {"jp": "あの店がおすすめです。", "en": "I'd recommend that shop."},
+      {"jp": "安くておいしいからです。", "en": "Because it's cheap and good."},
+      {"jp": "初めての人にもいいと思います。", "en": "I think it's good for first-timers too."},
+      {"jp": "行ってみてください。", "en": "Do give it a try."}
+    ],
+    "vocab": ["店", "安い", "初め", "行く"],
+    "grammar": ["n3_ni_totte"],
+    "stretch": "Add a caveat: ただ、週末は混んでいることが多いです。"
+  },
+  {
+    "id": "talk_about_future", "level": 3, "category": "Talking about yourself",
+    "title": "Say what you plan to do",
+    "setting": "Someone asks about your plans",
+    "goal": "State an intention, give a reason, and say what's uncertain.",
+    "steps": ["State the intention", "Give a reason", "Say what's uncertain"],
+    "phrases": [
+      {"jp": "来年、日本に住むつもりです。", "en": "I intend to live in Japan next year."},
+      {"jp": "もっと日本語を使いたいからです。", "en": "Because I want to use more Japanese."},
+      {"jp": "ただ、仕事が決まるかどうか分かりません。", "en": "Only, I don't know whether I'll get a job."},
+      {"jp": "決まったら、連絡します。", "en": "I'll let you know once it's settled."}
+    ],
+    "vocab": ["来年", "住む", "使う", "決まる"],
+    "grammar": ["n3_tsumori", "n3_ka_dou_ka"],
+    "stretch": "Add the fallback: だめだったら、もう一年勉強を続けるつもりです。"
+  },
+  {
+    "id": "talk_about_past_study", "level": 3, "category": "Talking about yourself",
+    "title": "Say how your studying is going",
+    "setting": "Someone asks how it's going",
+    "goal": "Say what's improved, what hasn't, and what you're doing about it.",
+    "steps": ["What's improved", "What hasn't", "What you're doing about it"],
+    "phrases": [
+      {"jp": "読むのは少しできるようになりました。", "en": "I've become able to read a little."},
+      {"jp": "でも、聞き取りはまだ苦手です。", "en": "But listening is still my weak point."},
+      {"jp": "毎日少しずつ練習するようにしています。", "en": "I make a point of practising a little every day."},
+      {"jp": "続けることが大事だと思います。", "en": "I think keeping it up is what matters."}
+    ],
+    "vocab": ["読む", "聞く", "毎日", "練習", "続ける"],
+    "grammar": ["n4_you_ni_naru", "n4_you_ni_suru"],
+    "stretch": "Be honest about a slump: 最近、伸びていない気がして、少し焦っています。"
+  }
+]

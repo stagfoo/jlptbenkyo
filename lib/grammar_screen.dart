@@ -40,7 +40,8 @@ class _GrammarScreenState extends State<GrammarScreen> {
 
   Future<void> _load() async {
     final points =
-        await widget.app.content.grammar(minLevel: widget.app.settings.minLevel);
+        await widget.app.content.grammar(
+            easiestLevel: widget.app.settings.easiestLevel);
     if (!mounted) return;
     setState(() {
       _points = points;

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'app_state.dart';
+import 'challenge_screen.dart';
 import 'grammar_screen.dart';
 import 'notifications.dart';
 import 'practice_screens.dart';
@@ -160,6 +161,8 @@ class _HomeScreenState extends State<HomeScreen> {
               reviewedToday: app.reviewedToday,
               onStart: _startReview,
             ),
+            const SizedBox(height: 16),
+            _ChallengeCard(app: app, onOpen: () => _push(ChallengeScreen(app: app))),
             const SizedBox(height: 24),
             Text('Practice', style: Theme.of(context).textTheme.titleMedium),
             const SizedBox(height: 8),
@@ -289,6 +292,90 @@ class _DueCard extends StatelessWidget {
               ),
             ],
           ],
+        ),
+      ),
+    );
+  }
+}
+
+/// Today's challenge, on the home screen.
+///
+/// Above the practice list rather than in it: it is the one thing here
+/// that expires. A reading exercise is the same tomorrow; the day's
+/// challenge is not, and burying it in a list of things that keep would
+/// mean never doing it.
+class _ChallengeCard extends StatelessWidget {
+  const _ChallengeCard({required this.app, required this.onOpen});
+
+  final AppState app;
+  final VoidCallback onOpen;
+
+  @override
+  Widget build(BuildContext context) {
+    final detail = app.todaysChallengeDetail;
+    if (detail == null) return const SizedBox.shrink();
+
+    final theme = Theme.of(context);
+    final done = app.challengeDoneToday;
+
+    return Card(
+      color: done
+          ? theme.colorScheme.surfaceContainerLow
+          : theme.colorScheme.tertiaryContainer,
+      child: InkWell(
+        onTap: onOpen,
+        borderRadius: BorderRadius.circular(16),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Row(
+            children: [
+              Icon(
+                done ? Icons.check_circle_outline : Icons.flag_outlined,
+                size: 28,
+                color: done ? null : theme.colorScheme.onTertiaryContainer,
+              ),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          done ? 'Challenge done' : 'Today\'s challenge',
+                          style: theme.textTheme.labelLarge?.copyWith(
+                              color: done
+                                  ? null
+                                  : theme.colorScheme.onTertiaryContainer),
+                        ),
+                        if (app.challengeStreakDays > 0) ...[
+                          const SizedBox(width: 8),
+                          Text('· ${app.challengeStreakDays} day streak',
+                              style: theme.textTheme.bodySmall?.copyWith(
+                                  color: done
+                                      ? null
+                                      : theme.colorScheme
+                                          .onTertiaryContainer)),
+                        ],
+                      ],
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      detail.title,
+                      style: theme.textTheme.titleMedium?.copyWith(
+                          color: done
+                              ? null
+                              : theme.colorScheme.onTertiaryContainer),
+                    ),
+                  ],
+                ),
+              ),
+              Icon(Icons.chevron_right,
+                  color: done
+                      ? null
+                      : theme.colorScheme.onTertiaryContainer),
+            ],
+          ),
         ),
       ),
     );

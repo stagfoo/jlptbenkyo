@@ -29,7 +29,7 @@ class StudySettings {
   const StudySettings({
     this.newPerDay = 15,
     this.maxReviewsPerDay = 120,
-    this.minLevel = 3,
+    this.easiestLevel = 5,
     this.includeWords = true,
     this.includeKanji = true,
     this.includeGrammar = true,
@@ -46,10 +46,16 @@ class StudySettings {
   /// always the ones shown.
   final int maxReviewsPerDay;
 
-  /// The easiest level to include. 5 is everything from N5 up, 3 is
-  /// N3-specific material only. Levels count down, so this is a minimum
-  /// in number and a maximum in difficulty.
-  final int minLevel;
+  /// The easiest JLPT level to include, as a number: 5 keeps N5, N4 and
+  /// N3; 4 drops N5; 3 leaves N3-specific material only.
+  ///
+  /// Named for what it means rather than for the comparison, because the
+  /// numbers run backwards to the names — N5 is the *easiest* level and
+  /// the *highest* number. Filtering is `level <= easiestLevel`. Getting
+  /// that the wrong way round silently inverts the setting: "N5-N3" then
+  /// returns 718 words instead of 3,526, and the app studies the
+  /// opposite of what the label says.
+  final int easiestLevel;
 
   final bool includeWords;
   final bool includeKanji;
@@ -64,7 +70,7 @@ class StudySettings {
   StudySettings copyWith({
     int? newPerDay,
     int? maxReviewsPerDay,
-    int? minLevel,
+    int? easiestLevel,
     bool? includeWords,
     bool? includeKanji,
     bool? includeGrammar,
@@ -72,7 +78,7 @@ class StudySettings {
       StudySettings(
         newPerDay: newPerDay ?? this.newPerDay,
         maxReviewsPerDay: maxReviewsPerDay ?? this.maxReviewsPerDay,
-        minLevel: minLevel ?? this.minLevel,
+        easiestLevel: easiestLevel ?? this.easiestLevel,
         includeWords: includeWords ?? this.includeWords,
         includeKanji: includeKanji ?? this.includeKanji,
         includeGrammar: includeGrammar ?? this.includeGrammar,

@@ -74,6 +74,15 @@ class ReviewStore {
           )
         ''');
         await db.execute('''
+          CREATE TABLE challenge_done (
+            id           INTEGER PRIMARY KEY AUTOINCREMENT,
+            challenge_id TEXT    NOT NULL,
+            at           INTEGER NOT NULL,
+            note         TEXT
+          )
+        ''');
+        await db.execute('CREATE INDEX challenge_done_at ON challenge_done(at)');
+        await db.execute('''
           CREATE TABLE recording (
             id         INTEGER PRIMARY KEY AUTOINCREMENT,
             sentence_id INTEGER NOT NULL,
@@ -224,6 +233,49 @@ class ReviewStore {
 
   Future<int> intSetting(String key, int fallback) async =>
       int.tryParse(await setting(key) ?? '') ?? fallback;
+
+  // -------------------------------------------------------- challenges
+
+  /// Marks today's challenge done.
+  ///
+  /// Appends rather than replaces: doing the same scenario again months
+  /// later is a second attempt, not a correction of the first, and the
+  /// history is what stops it being offered again next week.
+  Future<void> completeChallenge(String id, DateTime at,
+      {String? note}) async {
+    await _db.insert('challenge_done', {
+      'challenge_id': id,
+      'at': at.millisecondsSinceEpoch,
+      'note': note,
+    });
+  }
+
+  /// The ids most recently completed, newest first.
+  Future<List<String>> recentChallenges({int limit = 30}) async {
+    final rows = await _db.query('challenge_done',
+        columns: ['challenge_id'], orderBy: 'at DESC', limit: limit);
+    return [for (final r in rows) r['challenge_id']! as String];
+  }
+
+  Future<List<DateTime>> challengeCompletions({int limit = 400}) async {
+    final rows = await _db.query('challenge_done',
+        columns: ['at'], orderBy: 'at DESC', limit: limit);
+    return [
+      for (final r in rows)
+        DateTime.fromMillisecondsSinceEpoch(r['at']! as int),
+    ];
+  }
+
+  /// Whether a given challenge was completed today.
+  Future<bool> didChallengeToday(String id, DateTime now) async {
+    final start = DateTime(now.year, now.month, now.day);
+    final rows = await _db.rawQuery(
+      'SELECT 1 FROM challenge_done WHERE challenge_id = ? AND at >= ?'
+      ' LIMIT 1',
+      [id, start.millisecondsSinceEpoch],
+    );
+    return rows.isNotEmpty;
+  }
 
   // -------------------------------------------------------- recordings
 
