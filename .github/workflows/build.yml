@@ -1,0 +1,42 @@
+name: Build
+
+# Manual only. GitHub Actions minutes on a personal account are finite and
+# shared across every private repo; once the budget is gone an `on: push`
+# workflow just fails on every push, which is noise rather than signal.
+# `scripts/release.sh` builds and publishes locally and is the normal path.
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.47.0"
+          channel: "stable"
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Analyze
+        run: flutter analyze
+
+      - name: Test
+        run: flutter test
+
+      - name: Build release APK
+        # Release, not debug — the same artefact scripts/release.sh
+        # publishes, so a CI build and a local release install over each
+        # other. Signed with the committed debug.keystore either way.
+        run: flutter build apk --release --target-platform android-arm64 --split-per-abi
+
+      - name: Upload release APK
+        uses: actions/upload-artifact@v7
+        with:
+          name: jlptbenkyo-release-apk
+          path: build/app/outputs/flutter-apk/app-arm64-v8a-release.apk
+          retention-days: 14

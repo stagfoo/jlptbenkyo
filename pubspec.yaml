@@ -1,0 +1,53 @@
+name: jlptbenkyo
+description: "JLPT study — N5 through N3 vocabulary, kanji, grammar, reading, listening, speaking and writing."
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  # Matches the installed Dart (3.13.0), not the conservative version
+  # `flutter create` templates in.
+  sdk: ^3.13.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # The content database — ~3,500 words, ~610 kanji, ~150 grammar points and
+  # 26,000 sentence pairs — ships as a prebuilt SQLite file and is queried in
+  # place. Holding that in Dart maps would cost tens of MB of heap for data
+  # that is read a card at a time.
+  sqflite: ^2.4.4
+
+  # Where the review state and the speaking recordings live.
+  path_provider: ^2.1.6
+
+  # Listening. Japanese text-to-speech from the device's own voice, so there
+  # is no audio to bundle and every one of the 26,000 sentences can be heard,
+  # not just the few hundred someone recorded.
+  flutter_tts: ^4.2.5
+
+  # Speaking. Records an attempt so it can be played back against the TTS
+  # reference — self-assessment, because nothing here can score a Japanese
+  # accent honestly and pretending to would be worse than not trying.
+  record: ^7.1.1
+
+  # Playing those recordings back. Same package as the other apps here rather
+  # than a second audio stack for one screen.
+  audioplayers: ^6.8.1
+
+  # The daily reminder. Local notifications only — the app never talks to a
+  # network, so there is no push server and nothing leaves the device.
+  flutter_local_notifications: ^22.3.1
+  # Required by the above to schedule against a real local clock rather than
+  # UTC, which is what makes "remind me at 8pm" survive a timezone change.
+  timezone: ^0.11.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/

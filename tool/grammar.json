@@ -1,0 +1,1058 @@
+[
+  {
+    "id": "n5_wa", "level": 5, "category": "Particles",
+    "pattern": "〜は", "formation": "Noun + は",
+    "meaning": "topic marker — 'as for X'. Says what the sentence is about, not who did it.",
+    "match": ["は"],
+    "note": "Written は, pronounced wa. Contrast with が, which introduces new or emphasised information.",
+    "examples": [{"jp": "私は学生です。", "en": "I am a student."}]
+  },
+  {
+    "id": "n5_ga", "level": 5, "category": "Particles",
+    "pattern": "〜が", "formation": "Noun + が",
+    "meaning": "subject marker; also 'but' between clauses.",
+    "match": ["が好き", "が上手", "があります"],
+    "examples": [{"jp": "猫が好きです。", "en": "I like cats."}]
+  },
+  {
+    "id": "n5_tai", "level": 5, "category": "Desire",
+    "pattern": "〜たい", "formation": "Verb stem + たい",
+    "meaning": "want to do. Conjugates like an い-adjective.",
+    "match": ["たいです", "たかった"],
+    "note": "Only for your own desire. Someone else's takes 〜たがる.",
+    "examples": [{"jp": "日本へ行きたいです。", "en": "I want to go to Japan."}]
+  },
+  {
+    "id": "n5_te_kudasai", "level": 5, "category": "Requests",
+    "pattern": "〜てください", "formation": "Verb て-form + ください",
+    "meaning": "please do. A polite request or instruction.",
+    "match": ["てください", "でください"],
+    "examples": [{"jp": "ちょっと待ってください。", "en": "Please wait a moment."}]
+  },
+  {
+    "id": "n5_te_mo_ii", "level": 5, "category": "Permission",
+    "pattern": "〜てもいい", "formation": "Verb て-form + もいい",
+    "meaning": "may; it is all right to do.",
+    "match": ["てもいい", "でもいい"],
+    "examples": [{"jp": "ここに座ってもいいですか。", "en": "May I sit here?"}]
+  },
+  {
+    "id": "n5_naide_kudasai", "level": 5, "category": "Requests",
+    "pattern": "〜ないでください", "formation": "Verb ない-form + でください",
+    "meaning": "please do not do.",
+    "match": ["ないでください"],
+    "examples": [{"jp": "心配しないでください。", "en": "Please don't worry."}]
+  },
+  {
+    "id": "n5_koto_ga_dekiru", "level": 5, "category": "Ability",
+    "pattern": "〜ことができる", "formation": "Dictionary form + ことができる",
+    "meaning": "can; be able to.",
+    "match": ["ことができ"],
+    "note": "The potential form (書ける) says the same thing more briefly and is far more common in speech.",
+    "examples": [{"jp": "日本語を話すことができます。", "en": "I can speak Japanese."}]
+  },
+  {
+    "id": "n5_kara_node", "level": 5, "category": "Cause and reason",
+    "pattern": "〜から / 〜ので", "formation": "Plain form + から / ので",
+    "meaning": "because. から states your own reason; ので is softer and more objective.",
+    "match": ["からです", "ので、"],
+    "examples": [{"jp": "寒いから、窓を閉めます。", "en": "It's cold, so I'll close the window."}]
+  },
+  {
+    "id": "n4_you_ni_naru", "level": 4, "category": "Change",
+    "pattern": "〜ようになる", "formation": "Dictionary / ない form + ようになる",
+    "meaning": "come to; reach the point where. A gradual change of state or ability.",
+    "match": ["ようになっ", "ようになり", "ようになる"],
+    "note": "With a potential verb it means an ability you did not have before.",
+    "examples": [{"jp": "日本語が話せるようになりました。", "en": "I have become able to speak Japanese."}]
+  },
+  {
+    "id": "n4_you_ni_suru", "level": 4, "category": "Effort",
+    "pattern": "〜ようにする", "formation": "Dictionary / ない form + ようにする",
+    "meaning": "make an effort to; see to it that. A habit you are trying to keep.",
+    "match": ["ようにして", "ようにしている"],
+    "examples": [{"jp": "毎日運動するようにしています。", "en": "I make a point of exercising every day."}]
+  },
+  {
+    "id": "n4_koto_ni_suru", "level": 4, "category": "Decisions",
+    "pattern": "〜ことにする", "formation": "Dictionary / ない form + ことにする",
+    "meaning": "decide to. The decision is yours.",
+    "match": ["ことにした", "ことにしま", "ことにする"],
+    "note": "Compare 〜ことになる, where the decision is made for you.",
+    "examples": [{"jp": "留学することにしました。", "en": "I've decided to study abroad."}]
+  },
+  {
+    "id": "n4_koto_ni_naru", "level": 4, "category": "Decisions",
+    "pattern": "〜ことになる", "formation": "Dictionary / ない form + ことになる",
+    "meaning": "it has been decided that; it turns out that. Decided by circumstance or by someone else.",
+    "match": ["ことになった", "ことになりま", "ことになる"],
+    "examples": [{"jp": "来月、東京に行くことになりました。", "en": "It's been decided that I'll go to Tokyo next month."}]
+  },
+  {
+    "id": "n4_sou_da_hearsay", "level": 4, "category": "Reporting",
+    "pattern": "〜そうだ（伝聞）", "formation": "Plain form + そうだ",
+    "meaning": "I hear that; they say that. Reporting what you were told.",
+    "match": ["そうです", "そうだ"],
+    "note": "Distinguished from the 'looks like' そうだ by what comes before it: plain form here, verb stem or adjective stem there.",
+    "examples": [{"jp": "明日は雨が降るそうです。", "en": "I hear it's going to rain tomorrow."}]
+  },
+  {
+    "id": "n4_you_da", "level": 4, "category": "Inference",
+    "pattern": "〜ようだ / 〜みたいだ", "formation": "Plain form + ようだ; Noun + のようだ",
+    "meaning": "it seems; it looks as though. Based on what you can see or sense.",
+    "match": ["ようです", "みたいです", "みたいだ"],
+    "note": "みたいだ is the casual equivalent.",
+    "examples": [{"jp": "誰かいるようです。", "en": "It seems someone is here."}]
+  },
+  {
+    "id": "n4_rashii", "level": 4, "category": "Inference",
+    "pattern": "〜らしい", "formation": "Plain form + らしい",
+    "meaning": "apparently; seems (from what you have heard). Also 'typical of' after a noun.",
+    "match": ["らしいです", "らしい"],
+    "examples": [{"jp": "彼は来ないらしい。", "en": "Apparently he isn't coming."}]
+  },
+  {
+    "id": "n4_hazu", "level": 4, "category": "Expectation",
+    "pattern": "〜はずだ", "formation": "Plain form + はずだ",
+    "meaning": "ought to be; is supposed to be. A confident expectation with a reason behind it.",
+    "match": ["はずです", "はずだ", "はずがない"],
+    "note": "〜はずがない is the strong denial: 'there's no way that'.",
+    "examples": [{"jp": "彼はもう着いているはずです。", "en": "He should have arrived by now."}]
+  },
+  {
+    "id": "n4_nagara", "level": 4, "category": "Simultaneous action",
+    "pattern": "〜ながら", "formation": "Verb stem + ながら",
+    "meaning": "while doing. Two things at once by the same person.",
+    "match": ["ながら"],
+    "note": "The main action is the second clause; the ながら clause is the background one.",
+    "examples": [{"jp": "音楽を聞きながら勉強します。", "en": "I study while listening to music."}]
+  },
+  {
+    "id": "n3_ni_oite", "level": 3, "category": "Formal particles",
+    "pattern": "〜において / 〜における", "formation": "Noun + において; Noun + における + Noun",
+    "meaning": "in; at; on. The formal written replacement for で, used for places, fields and occasions.",
+    "match": ["において", "における"],
+    "note": "Belongs to written and formal Japanese. Saying it in casual conversation sounds like reading from a report.",
+    "examples": [{"jp": "会議は東京において行われた。", "en": "The meeting was held in Tokyo."}]
+  },
+  {
+    "id": "n3_ni_taishite", "level": 3, "category": "Formal particles",
+    "pattern": "〜に対して / 〜に対する", "formation": "Noun + に対して; Noun + に対する + Noun",
+    "meaning": "towards; with regard to; in contrast with. Marks the target of an attitude or action.",
+    "match": ["に対して", "に対する"],
+    "note": "Also used to set two things against each other: 'whereas'.",
+    "examples": [{"jp": "先生に対して失礼なことを言った。", "en": "He said something rude to the teacher."}]
+  },
+  {
+    "id": "n3_ni_tsuite", "level": 3, "category": "Formal particles",
+    "pattern": "〜について", "formation": "Noun + について",
+    "meaning": "about; concerning. The topic of talking, thinking or writing.",
+    "match": ["について"],
+    "examples": [{"jp": "この問題について話しましょう。", "en": "Let's talk about this problem."}]
+  },
+  {
+    "id": "n3_ni_yotte", "level": 3, "category": "Formal particles",
+    "pattern": "〜によって / 〜による", "formation": "Noun + によって",
+    "meaning": "by means of; due to; depending on. Also marks the agent in a passive sentence.",
+    "match": ["によって", "による"],
+    "note": "Four distinct uses — cause, means, agent, and 'varies with' — separated only by context.",
+    "examples": [{"jp": "人によって考え方が違う。", "en": "Ways of thinking differ from person to person."}]
+  },
+  {
+    "id": "n3_ni_totte", "level": 3, "category": "Formal particles",
+    "pattern": "〜にとって", "formation": "Noun + にとって",
+    "meaning": "for; from the standpoint of. Whose judgement this is.",
+    "match": ["にとって"],
+    "note": "Takes an evaluation, not an action: 〜にとって大切だ, not 〜にとって行く.",
+    "examples": [{"jp": "私にとって家族が一番大切です。", "en": "For me, family is the most important thing."}]
+  },
+  {
+    "id": "n3_ni_kanshite", "level": 3, "category": "Formal particles",
+    "pattern": "〜に関して / 〜に関する", "formation": "Noun + に関して; Noun + に関する + Noun",
+    "meaning": "regarding; concerning. The formal counterpart of について.",
+    "match": ["に関して", "に関する"],
+    "examples": [{"jp": "その件に関しては後で話します。", "en": "I'll speak about that matter later."}]
+  },
+  {
+    "id": "n3_wo_tsujite", "level": 3, "category": "Formal particles",
+    "pattern": "〜を通じて / 〜を通して", "formation": "Noun + を通じて / を通して",
+    "meaning": "through; by way of; throughout (a period).",
+    "match": ["を通じて", "を通して"],
+    "examples": [{"jp": "友人を通じて彼を知った。", "en": "I got to know him through a friend."}]
+  },
+  {
+    "id": "n3_wo_moto_ni", "level": 3, "category": "Formal particles",
+    "pattern": "〜をもとに", "formation": "Noun + をもとに(して)",
+    "meaning": "on the basis of; using as material.",
+    "match": ["をもとに"],
+    "examples": [{"jp": "実話をもとに映画が作られた。", "en": "The film was made based on a true story."}]
+  },
+  {
+    "id": "n3_ni_motozuite", "level": 3, "category": "Formal particles",
+    "pattern": "〜に基づいて / 〜に基づく", "formation": "Noun + に基づいて",
+    "meaning": "based on; in accordance with. Stricter than をもとに — a rule or principle being followed.",
+    "match": ["に基づいて", "に基づく", "に基づき"],
+    "examples": [{"jp": "法律に基づいて処理する。", "en": "It will be handled in accordance with the law."}]
+  },
+  {
+    "id": "n3_ni_kakete", "level": 3, "category": "Range",
+    "pattern": "〜から〜にかけて", "formation": "Noun + から + Noun + にかけて",
+    "meaning": "from … through …. A vague span of time or space.",
+    "match": ["にかけて"],
+    "note": "Unlike 〜から〜まで, the endpoints are approximate.",
+    "examples": [{"jp": "夜から朝にかけて雪が降った。", "en": "It snowed from night through to morning."}]
+  },
+  {
+    "id": "n3_ni_watatte", "level": 3, "category": "Range",
+    "pattern": "〜にわたって / 〜にわたる", "formation": "Noun + にわたって",
+    "meaning": "over; spanning; throughout. Emphasises how large the span is.",
+    "match": ["にわたって", "にわたり", "にわたる"],
+    "examples": [{"jp": "工事は三年にわたって続いた。", "en": "The construction went on for three years."}]
+  },
+  {
+    "id": "n3_okage_de", "level": 3, "category": "Cause and reason",
+    "pattern": "〜おかげで", "formation": "Plain form / Noun + の + おかげで",
+    "meaning": "thanks to. A cause with a welcome result.",
+    "match": ["おかげで", "おかげさま"],
+    "note": "Paired with 〜せいで, which is the same structure for an unwelcome result.",
+    "examples": [{"jp": "先生のおかげで合格できました。", "en": "Thanks to my teacher, I was able to pass."}]
+  },
+  {
+    "id": "n3_sei_de", "level": 3, "category": "Cause and reason",
+    "pattern": "〜せいで / 〜せいか", "formation": "Plain form / Noun + の + せいで",
+    "meaning": "because of (blame). せいか softens it to 'perhaps because'.",
+    "match": ["せいで", "せいか"],
+    "examples": [{"jp": "雨のせいで試合が中止になった。", "en": "The match was cancelled because of the rain."}]
+  },
+  {
+    "id": "n3_tame_ni", "level": 3, "category": "Cause and reason",
+    "pattern": "〜ために", "formation": "Plain form / Noun + の + ために",
+    "meaning": "because of; for the purpose of. Objective cause, or a goal.",
+    "match": ["ために", "ための"],
+    "note": "With a volitional verb it is purpose; with a state or past event it is cause.",
+    "examples": [{"jp": "事故のために電車が遅れた。", "en": "The train was late because of an accident."}]
+  },
+  {
+    "id": "n3_ijou_wa", "level": 3, "category": "Cause and reason",
+    "pattern": "〜以上（は）", "formation": "Plain form + 以上(は)",
+    "meaning": "now that; since. A fact that obliges a conclusion.",
+    "match": ["以上は", "以上、"],
+    "note": "The second clause usually carries duty, determination or advice.",
+    "examples": [{"jp": "約束した以上、守らなければならない。", "en": "Now that I've promised, I have to keep it."}]
+  },
+  {
+    "id": "n3_kara_ni_wa", "level": 3, "category": "Cause and reason",
+    "pattern": "〜からには", "formation": "Plain form + からには",
+    "meaning": "now that; as long as. Like 以上は, with more personal resolve.",
+    "match": ["からには"],
+    "examples": [{"jp": "やるからには最後までやる。", "en": "If I'm going to do it, I'll see it through."}]
+  },
+  {
+    "id": "n3_koto_kara", "level": 3, "category": "Cause and reason",
+    "pattern": "〜ことから", "formation": "Plain form + ことから",
+    "meaning": "from the fact that; which is why. Gives the evidence for a name or conclusion.",
+    "match": ["ことから"],
+    "examples": [{"jp": "形が富士山に似ていることから、こう呼ばれる。", "en": "It is called this because its shape resembles Mt Fuji."}]
+  },
+  {
+    "id": "n3_ni_mo_kakawarazu", "level": 3, "category": "Concession",
+    "pattern": "〜にもかかわらず", "formation": "Plain form / Noun + にもかかわらず",
+    "meaning": "despite; in spite of. Formal, and stronger than のに.",
+    "match": ["にもかかわらず", "かかわらず"],
+    "examples": [{"jp": "雨にもかかわらず試合は行われた。", "en": "The match went ahead despite the rain."}]
+  },
+  {
+    "id": "n3_nagara_mo", "level": 3, "category": "Concession",
+    "pattern": "〜ながら（も）", "formation": "Verb stem / い-adj / Noun + ながら(も)",
+    "meaning": "although; even though. Not the 'while doing' ながら.",
+    "match": ["ながらも"],
+    "note": "Told apart from simultaneous-action ながら by the clash in meaning between the two clauses.",
+    "examples": [{"jp": "残念ながら、参加できません。", "en": "Regrettably, I can't take part."}]
+  },
+  {
+    "id": "n3_kuse_ni", "level": 3, "category": "Concession",
+    "pattern": "〜くせに", "formation": "Plain form / Noun + の + くせに",
+    "meaning": "even though; and yet. Carries criticism or contempt.",
+    "match": ["くせに"],
+    "note": "Never neutral. Using it about yourself, or to a superior, is a mistake.",
+    "examples": [{"jp": "知っているくせに教えてくれない。", "en": "He knows but won't tell me."}]
+  },
+  {
+    "id": "n3_mono_no", "level": 3, "category": "Concession",
+    "pattern": "〜ものの", "formation": "Plain form + ものの",
+    "meaning": "although; but. Written, and concedes a fact before undercutting it.",
+    "match": ["ものの"],
+    "examples": [{"jp": "買ったものの、一度も使っていない。", "en": "I bought it, but I've never once used it."}]
+  },
+  {
+    "id": "n3_dokoroka", "level": 3, "category": "Concession",
+    "pattern": "〜どころか", "formation": "Plain form / Noun + どころか",
+    "meaning": "far from; let alone. Denies what was expected and replaces it with the opposite.",
+    "match": ["どころか"],
+    "examples": [{"jp": "漢字どころかひらがなも読めない。", "en": "Far from kanji, he can't even read hiragana."}]
+  },
+  {
+    "id": "n3_wari_ni", "level": 3, "category": "Concession",
+    "pattern": "〜わりに（は）", "formation": "Plain form / Noun + の + わりに",
+    "meaning": "considering; for a …. Something does not match what you would expect from it.",
+    "match": ["わりに", "わりには"],
+    "examples": [{"jp": "値段のわりにおいしい。", "en": "It's tasty for the price."}]
+  },
+  {
+    "id": "n3_hodo", "level": 3, "category": "Degree",
+    "pattern": "〜ほど", "formation": "Plain form / Noun + ほど",
+    "meaning": "to the extent that; about. Measures how much by comparing.",
+    "match": ["ほど"],
+    "note": "In 〜ば〜ほど it means 'the more … the more'.",
+    "examples": [{"jp": "泣きたいほど嬉しかった。", "en": "I was so happy I could have cried."}]
+  },
+  {
+    "id": "n3_ba_hodo", "level": 3, "category": "Degree",
+    "pattern": "〜ば〜ほど", "formation": "Verb ば-form + dictionary form + ほど",
+    "meaning": "the more …, the more ….",
+    "match": ["ばいいほど", "ば〜ほど", "ほど、"],
+    "examples": [{"jp": "考えれば考えるほど分からなくなる。", "en": "The more I think, the less I understand."}]
+  },
+  {
+    "id": "n3_kurai_gurai", "level": 3, "category": "Degree",
+    "pattern": "〜くらい / 〜ぐらい", "formation": "Plain form / Noun + くらい",
+    "meaning": "about; to the point of. Often marks something as trivially small.",
+    "match": ["くらい", "ぐらい"],
+    "examples": [{"jp": "自分の部屋くらい掃除しなさい。", "en": "At least clean your own room."}]
+  },
+  {
+    "id": "n3_bakari", "level": 3, "category": "Degree",
+    "pattern": "〜ばかり", "formation": "Noun + ばかり; Verb て-form + ばかりいる",
+    "meaning": "nothing but; only. Complains that it is always the same thing.",
+    "match": ["ばかり"],
+    "note": "Verb た + ばかり is different again: 'just did'.",
+    "examples": [{"jp": "彼はゲームばかりしている。", "en": "He does nothing but play games."}]
+  },
+  {
+    "id": "n3_bakari_de_naku", "level": 3, "category": "Addition",
+    "pattern": "〜ばかりでなく", "formation": "Plain form / Noun + ばかりでなく",
+    "meaning": "not only … but also.",
+    "match": ["ばかりでなく", "ばかりか"],
+    "examples": [{"jp": "彼は英語ばかりでなく中国語も話せる。", "en": "He speaks not only English but Chinese too."}]
+  },
+  {
+    "id": "n3_dake_de_naku", "level": 3, "category": "Addition",
+    "pattern": "〜だけでなく", "formation": "Plain form / Noun + だけでなく",
+    "meaning": "not only … but also. The everyday version of ばかりでなく.",
+    "match": ["だけでなく", "だけではなく"],
+    "examples": [{"jp": "味だけでなく見た目もいい。", "en": "Not only the taste but the look of it is good."}]
+  },
+  {
+    "id": "n3_ue_ni", "level": 3, "category": "Addition",
+    "pattern": "〜上（に）", "formation": "Plain form + 上に",
+    "meaning": "on top of that; in addition. Both clauses must lean the same way.",
+    "match": ["上に"],
+    "examples": [{"jp": "安い上においしい。", "en": "It's cheap, and on top of that it's delicious."}]
+  },
+  {
+    "id": "n3_to_iu_yori", "level": 3, "category": "Comparison",
+    "pattern": "〜というより", "formation": "Plain form / Noun + というより",
+    "meaning": "rather than; more … than. Corrects a description.",
+    "match": ["というより"],
+    "examples": [{"jp": "寒いというより痛い。", "en": "It's painful rather than cold."}]
+  },
+  {
+    "id": "n3_ni_chigainai", "level": 3, "category": "Certainty",
+    "pattern": "〜に違いない", "formation": "Plain form + に違いない",
+    "meaning": "must be; no doubt. A confident inference.",
+    "match": ["に違いない"],
+    "examples": [{"jp": "彼は知っているに違いない。", "en": "He must know."}]
+  },
+  {
+    "id": "n3_wake_ga_nai", "level": 3, "category": "Certainty",
+    "pattern": "〜わけがない", "formation": "Plain form + わけがない",
+    "meaning": "there's no way that; it's impossible that.",
+    "match": ["わけがない", "わけない"],
+    "examples": [{"jp": "そんなことがあるわけがない。", "en": "There's no way that could happen."}]
+  },
+  {
+    "id": "n3_wake_de_wa_nai", "level": 3, "category": "Certainty",
+    "pattern": "〜わけではない", "formation": "Plain form + わけではない",
+    "meaning": "it doesn't mean that; not necessarily. A partial denial.",
+    "match": ["わけではない", "わけじゃない"],
+    "note": "Denies an inference someone might draw, not the fact itself.",
+    "examples": [{"jp": "嫌いなわけではない。", "en": "It's not that I dislike it."}]
+  },
+  {
+    "id": "n3_wake_da", "level": 3, "category": "Certainty",
+    "pattern": "〜わけだ", "formation": "Plain form + わけだ",
+    "meaning": "that's why; no wonder. The conclusion that follows naturally.",
+    "match": ["わけだ", "わけです"],
+    "examples": [{"jp": "道理で寒いわけだ。", "en": "No wonder it's cold."}]
+  },
+  {
+    "id": "n3_hazu_ga_nai", "level": 3, "category": "Certainty",
+    "pattern": "〜はずがない", "formation": "Plain form + はずがない",
+    "meaning": "cannot possibly be. Denies on the strength of a reason.",
+    "match": ["はずがない", "はずはない"],
+    "examples": [{"jp": "彼が犯人のはずがない。", "en": "There's no way he's the culprit."}]
+  },
+  {
+    "id": "n3_kamoshirenai", "level": 3, "category": "Certainty",
+    "pattern": "〜かもしれない", "formation": "Plain form + かもしれない",
+    "meaning": "might; may. Low confidence.",
+    "match": ["かもしれない", "かもしれません"],
+    "examples": [{"jp": "明日は雨が降るかもしれない。", "en": "It might rain tomorrow."}]
+  },
+  {
+    "id": "n3_tokoro_da", "level": 3, "category": "Aspect",
+    "pattern": "〜ところだ", "formation": "Dictionary / ている / た + ところだ",
+    "meaning": "about to / in the middle of / just finished. Which one depends on the form before it.",
+    "match": ["ところです", "ところだ", "ところ、"],
+    "examples": [{"jp": "今から出かけるところです。", "en": "I'm just about to go out."}]
+  },
+  {
+    "id": "n3_bakari_da_past", "level": 3, "category": "Aspect",
+    "pattern": "〜たばかり", "formation": "Verb た-form + ばかり",
+    "meaning": "just did. How recent it feels, not how recent it was.",
+    "match": ["たばかり", "だばかり"],
+    "note": "Differs from 〜たところ, which is objectively a moment ago.",
+    "examples": [{"jp": "日本に来たばかりです。", "en": "I've only just come to Japan."}]
+  },
+  {
+    "id": "n3_tsuzukeru", "level": 3, "category": "Aspect",
+    "pattern": "〜続ける / 〜続く", "formation": "Verb stem + 続ける",
+    "meaning": "keep doing; go on doing.",
+    "match": ["続けて", "続ける", "続けた"],
+    "examples": [{"jp": "三時間歩き続けた。", "en": "I kept walking for three hours."}]
+  },
+  {
+    "id": "n3_hajimeru_dasu", "level": 3, "category": "Aspect",
+    "pattern": "〜始める / 〜出す", "formation": "Verb stem + 始める / 出す",
+    "meaning": "start doing. 〜出す adds suddenness.",
+    "match": ["始めた", "始める", "出した"],
+    "examples": [{"jp": "急に泣き出した。", "en": "She suddenly burst into tears."}]
+  },
+  {
+    "id": "n3_owaru", "level": 3, "category": "Aspect",
+    "pattern": "〜終わる", "formation": "Verb stem + 終わる",
+    "meaning": "finish doing.",
+    "match": ["終わった", "終わる"],
+    "examples": [{"jp": "本を読み終わった。", "en": "I finished reading the book."}]
+  },
+  {
+    "id": "n3_te_shimau", "level": 3, "category": "Aspect",
+    "pattern": "〜てしまう", "formation": "Verb て-form + しまう",
+    "meaning": "do completely; do by accident (and regret it).",
+    "match": ["てしまった", "てしまう", "ちゃった"],
+    "note": "Contracts to 〜ちゃう / 〜じゃう in speech.",
+    "examples": [{"jp": "財布を忘れてしまった。", "en": "I've gone and forgotten my wallet."}]
+  },
+  {
+    "id": "n3_te_oku", "level": 3, "category": "Aspect",
+    "pattern": "〜ておく", "formation": "Verb て-form + おく",
+    "meaning": "do in advance; leave something done.",
+    "match": ["ておく", "ておいて", "とく"],
+    "examples": [{"jp": "先に予約しておきます。", "en": "I'll book it in advance."}]
+  },
+  {
+    "id": "n3_te_aru", "level": 3, "category": "Aspect",
+    "pattern": "〜てある", "formation": "Transitive verb て-form + ある",
+    "meaning": "has been done (and remains so). Someone did it on purpose.",
+    "match": ["てあります", "てある"],
+    "note": "〜ている with an intransitive verb describes the same scene without an agent.",
+    "examples": [{"jp": "窓が開けてある。", "en": "The window has been left open."}]
+  },
+  {
+    "id": "n3_te_iku_kuru", "level": 3, "category": "Aspect",
+    "pattern": "〜ていく / 〜てくる", "formation": "Verb て-form + いく / くる",
+    "meaning": "go on doing (from now) / have been doing (up to now). Direction in time or space.",
+    "match": ["ていく", "てくる", "てきた"],
+    "examples": [{"jp": "だんだん寒くなってきた。", "en": "It's been getting colder."}]
+  },
+  {
+    "id": "n3_tamaranai", "level": 3, "category": "Feeling",
+    "pattern": "〜てたまらない", "formation": "て-form of adjective or verb + たまらない",
+    "meaning": "unbearably; can't stand how ….",
+    "match": ["てたまらない", "でたまらない"],
+    "examples": [{"jp": "暑くてたまらない。", "en": "It's unbearably hot."}]
+  },
+  {
+    "id": "n3_te_shikataganai", "level": 3, "category": "Feeling",
+    "pattern": "〜てしかたがない", "formation": "て-form + しかたがない / しょうがない",
+    "meaning": "can't help feeling; terribly.",
+    "match": ["しかたがない", "しょうがない", "てしかたが"],
+    "examples": [{"jp": "心配でしかたがない。", "en": "I can't stop worrying."}]
+  },
+  {
+    "id": "n3_gachi", "level": 3, "category": "Tendency",
+    "pattern": "〜がち", "formation": "Verb stem / Noun + がち",
+    "meaning": "tends to; prone to. Almost always something unwanted.",
+    "match": ["がちだ", "がちです", "がちな"],
+    "examples": [{"jp": "最近、休みがちだ。", "en": "He's been absent a lot lately."}]
+  },
+  {
+    "id": "n3_gimi", "level": 3, "category": "Tendency",
+    "pattern": "〜気味", "formation": "Verb stem / Noun + 気味",
+    "meaning": "a touch of; slightly. A hint of a condition.",
+    "match": ["気味"],
+    "examples": [{"jp": "風邪気味です。", "en": "I have a bit of a cold."}]
+  },
+  {
+    "id": "n3_ppoi", "level": 3, "category": "Tendency",
+    "pattern": "〜っぽい", "formation": "Noun / Verb stem + っぽい",
+    "meaning": "-ish; looks like; tends to.",
+    "match": ["っぽい"],
+    "examples": [{"jp": "子供っぽい。", "en": "He's childish."}]
+  },
+  {
+    "id": "n3_kake", "level": 3, "category": "Aspect",
+    "pattern": "〜かけ / 〜かける", "formation": "Verb stem + かけ",
+    "meaning": "half-done; in the middle of.",
+    "match": ["かけの", "かけた", "しかけ"],
+    "examples": [{"jp": "読みかけの本。", "en": "A book I'm part-way through."}]
+  },
+  {
+    "id": "n3_kanenai", "level": 3, "category": "Possibility",
+    "pattern": "〜かねない", "formation": "Verb stem + かねない",
+    "meaning": "might well (something bad); is capable of.",
+    "match": ["かねない"],
+    "note": "Only ever for undesirable outcomes.",
+    "examples": [{"jp": "事故になりかねない。", "en": "It could well lead to an accident."}]
+  },
+  {
+    "id": "n3_ezaru", "level": 3, "category": "Obligation",
+    "pattern": "〜ざるを得ない", "formation": "Verb ない-stem + ざるを得ない",
+    "meaning": "have no choice but to. Formal.",
+    "match": ["ざるを得ない", "ざるをえない"],
+    "note": "する becomes せざるを得ない, not しざる.",
+    "examples": [{"jp": "認めざるを得ない。", "en": "I have no choice but to admit it."}]
+  },
+  {
+    "id": "n3_hoka_nai", "level": 3, "category": "Obligation",
+    "pattern": "〜よりほかない / 〜しかない", "formation": "Dictionary form + よりほかない / しかない",
+    "meaning": "there's nothing for it but to.",
+    "match": ["しかない", "よりほかない", "ほかない"],
+    "examples": [{"jp": "待つしかない。", "en": "There's nothing to do but wait."}]
+  },
+  {
+    "id": "n3_beki", "level": 3, "category": "Obligation",
+    "pattern": "〜べきだ", "formation": "Dictionary form + べきだ",
+    "meaning": "should; ought to. A moral judgement, not a rule.",
+    "match": ["べきだ", "べきです", "べきではない"],
+    "note": "する takes both するべき and すべき.",
+    "examples": [{"jp": "もっと早く言うべきだった。", "en": "You should have said so sooner."}]
+  },
+  {
+    "id": "n3_nakereba_naranai", "level": 3, "category": "Obligation",
+    "pattern": "〜なければならない", "formation": "Verb ない-stem + ければならない",
+    "meaning": "must; have to. An external obligation.",
+    "match": ["なければならない", "なければなりません", "なくてはいけない"],
+    "examples": [{"jp": "明日までに出さなければならない。", "en": "I have to hand it in by tomorrow."}]
+  },
+  {
+    "id": "n3_nakutemo_ii", "level": 3, "category": "Obligation",
+    "pattern": "〜なくてもいい", "formation": "Verb ない-stem + くてもいい",
+    "meaning": "don't have to.",
+    "match": ["なくてもいい", "なくてもかまわない"],
+    "examples": [{"jp": "無理に来なくてもいいですよ。", "en": "You don't have to force yourself to come."}]
+  },
+  {
+    "id": "n3_bun_ni_wa", "level": 3, "category": "Condition",
+    "pattern": "〜たら / 〜なら / 〜ば / 〜と", "formation": "four conditional forms",
+    "meaning": "if; when. たら is general, ば is hypothetical, なら responds to what was just said, と is automatic consequence.",
+    "match": ["たら", "なら", "ければ"],
+    "note": "The one N3 point most worth drilling as a set rather than one at a time — they overlap, and choosing wrongly is the commonest intermediate mistake.",
+    "examples": [{"jp": "春になると桜が咲く。", "en": "When spring comes, the cherries bloom."}]
+  },
+  {
+    "id": "n3_ba_yokatta", "level": 3, "category": "Regret",
+    "pattern": "〜ばよかった", "formation": "Verb ば-form + よかった",
+    "meaning": "should have; I wish I had.",
+    "match": ["ばよかった", "ればよかった"],
+    "examples": [{"jp": "もっと勉強すればよかった。", "en": "I should have studied more."}]
+  },
+  {
+    "id": "n3_tara_dou", "level": 3, "category": "Suggestion",
+    "pattern": "〜たらどうですか", "formation": "Verb た-form + らどうですか",
+    "meaning": "why don't you …? A suggestion.",
+    "match": ["たらどう", "たらどうですか"],
+    "examples": [{"jp": "少し休んだらどうですか。", "en": "Why don't you take a rest?"}]
+  },
+  {
+    "id": "n3_hou_ga_ii", "level": 3, "category": "Suggestion",
+    "pattern": "〜ほうがいい", "formation": "Verb た-form / ない-form + ほうがいい",
+    "meaning": "had better; it's better to.",
+    "match": ["ほうがいい", "方がいい"],
+    "note": "The past form is the advice form: 行ったほうがいい, not 行くほうがいい.",
+    "examples": [{"jp": "早く寝たほうがいい。", "en": "You'd better go to bed early."}]
+  },
+  {
+    "id": "n3_you_to_omou", "level": 3, "category": "Intention",
+    "pattern": "〜ようと思う", "formation": "Volitional form + と思う",
+    "meaning": "I think I'll; I intend to.",
+    "match": ["ようと思", "おうと思"],
+    "examples": [{"jp": "来年、留学しようと思っています。", "en": "I'm thinking of studying abroad next year."}]
+  },
+  {
+    "id": "n3_tsumori", "level": 3, "category": "Intention",
+    "pattern": "〜つもりだ", "formation": "Dictionary / ない form + つもりだ",
+    "meaning": "intend to; plan to. A settled intention.",
+    "match": ["つもりです", "つもりだ", "つもりはない"],
+    "examples": [{"jp": "今年は車を買うつもりです。", "en": "I plan to buy a car this year."}]
+  },
+  {
+    "id": "n3_you_to_suru", "level": 3, "category": "Intention",
+    "pattern": "〜ようとする", "formation": "Volitional form + とする",
+    "meaning": "try to; be about to.",
+    "match": ["ようとした", "ようとして", "おうとした"],
+    "examples": [{"jp": "出かけようとしたとき、電話が鳴った。", "en": "Just as I was about to leave, the phone rang."}]
+  },
+  {
+    "id": "n3_kotonisuru_kotomonai", "level": 3, "category": "Necessity",
+    "pattern": "〜ことはない", "formation": "Dictionary form + ことはない",
+    "meaning": "there's no need to.",
+    "match": ["ことはない"],
+    "examples": [{"jp": "心配することはない。", "en": "There's no need to worry."}]
+  },
+  {
+    "id": "n3_mono_da", "level": 3, "category": "Generalisation",
+    "pattern": "〜ものだ", "formation": "Dictionary form + ものだ",
+    "meaning": "it is the way things are; used to. A general truth, or nostalgia.",
+    "match": ["ものだ", "ものです"],
+    "examples": [{"jp": "時間が経つのは早いものだ。", "en": "Time really does fly."}]
+  },
+  {
+    "id": "n3_to_iu_koto_da", "level": 3, "category": "Reporting",
+    "pattern": "〜ということだ", "formation": "Plain form + ということだ",
+    "meaning": "it is said that; it means that.",
+    "match": ["ということだ", "ということです"],
+    "examples": [{"jp": "彼は来ないということだ。", "en": "Apparently he isn't coming."}]
+  },
+  {
+    "id": "n3_to_iu", "level": 3, "category": "Naming",
+    "pattern": "〜という", "formation": "Noun + という + Noun",
+    "meaning": "called; named. Introduces something the listener does not know.",
+    "match": ["という"],
+    "examples": [{"jp": "田中という人から電話がありました。", "en": "There was a call from someone called Tanaka."}]
+  },
+  {
+    "id": "n3_ni_yoruto", "level": 3, "category": "Reporting",
+    "pattern": "〜によると", "formation": "Noun + によると",
+    "meaning": "according to. Names the source, and pairs with そうだ at the end.",
+    "match": ["によると", "によれば"],
+    "examples": [{"jp": "天気予報によると、明日は晴れるそうだ。", "en": "According to the forecast, it'll be fine tomorrow."}]
+  },
+  {
+    "id": "n3_sae", "level": 3, "category": "Emphasis",
+    "pattern": "〜さえ", "formation": "Noun + さえ",
+    "meaning": "even. Picks an extreme case to make the point.",
+    "match": ["さえ"],
+    "note": "〜さえ〜ば means 'if only'.",
+    "examples": [{"jp": "子供でさえ知っている。", "en": "Even a child knows that."}]
+  },
+  {
+    "id": "n3_sae_ba", "level": 3, "category": "Condition",
+    "pattern": "〜さえ〜ば", "formation": "Noun + さえ + ば-form",
+    "meaning": "if only; as long as. One condition is enough.",
+    "match": ["さえすれば", "さえあれば", "さえいれば"],
+    "examples": [{"jp": "お金さえあれば買える。", "en": "As long as I have the money, I can buy it."}]
+  },
+  {
+    "id": "n3_koso", "level": 3, "category": "Emphasis",
+    "pattern": "〜こそ", "formation": "Noun + こそ",
+    "meaning": "precisely; it is exactly this that.",
+    "match": ["こそ"],
+    "examples": [{"jp": "今年こそ合格したい。", "en": "This year for sure I want to pass."}]
+  },
+  {
+    "id": "n3_shika_nai", "level": 3, "category": "Limitation",
+    "pattern": "〜しか〜ない", "formation": "Noun + しか + negative",
+    "meaning": "only; nothing but. Always with a negative verb, and faintly regretful.",
+    "match": ["しか"],
+    "note": "だけ is neutral; しか implies it is not enough.",
+    "examples": [{"jp": "千円しかない。", "en": "I've only got a thousand yen."}]
+  },
+  {
+    "id": "n3_tabi_ni", "level": 3, "category": "Time",
+    "pattern": "〜たびに", "formation": "Dictionary form / Noun + の + たびに",
+    "meaning": "every time; whenever.",
+    "match": ["たびに", "度に"],
+    "examples": [{"jp": "会うたびに背が伸びている。", "en": "Every time I see him he's taller."}]
+  },
+  {
+    "id": "n3_uchi_ni", "level": 3, "category": "Time",
+    "pattern": "〜うちに", "formation": "Dictionary / ない / ている form + うちに",
+    "meaning": "while; before it changes. Do it before the chance is gone.",
+    "match": ["うちに"],
+    "note": "〜ないうちに is 'before it happens'.",
+    "examples": [{"jp": "暗くならないうちに帰ろう。", "en": "Let's go home before it gets dark."}]
+  },
+  {
+    "id": "n3_aida_ni", "level": 3, "category": "Time",
+    "pattern": "〜間に", "formation": "Plain form / Noun + の + 間に",
+    "meaning": "while; during. 間 alone is the whole stretch; 間に is a moment inside it.",
+    "match": ["間に", "あいだに"],
+    "examples": [{"jp": "留守の間に手紙が届いた。", "en": "A letter arrived while I was out."}]
+  },
+  {
+    "id": "n3_toori_ni", "level": 3, "category": "Manner",
+    "pattern": "〜とおりに", "formation": "Dictionary / た form / Noun + の + とおりに",
+    "meaning": "just as; in the way that.",
+    "match": ["とおりに", "通りに"],
+    "examples": [{"jp": "説明書のとおりに組み立てた。", "en": "I assembled it just as the instructions said."}]
+  },
+  {
+    "id": "n3_mama", "level": 3, "category": "State",
+    "pattern": "〜まま", "formation": "た-form / ない-form / Noun + の + まま",
+    "meaning": "as it is; leaving it unchanged. Often with a hint that it should have changed.",
+    "match": ["まま"],
+    "examples": [{"jp": "靴を履いたまま入らないでください。", "en": "Please don't come in with your shoes on."}]
+  },
+  {
+    "id": "n3_kkiri", "level": 3, "category": "State",
+    "pattern": "〜きり", "formation": "た-form + きり; Noun + きり",
+    "meaning": "only; and that was the last of it.",
+    "match": ["きり"],
+    "examples": [{"jp": "彼とは一度会ったきりだ。", "en": "I met him once and that was it."}]
+  },
+  {
+    "id": "n3_te_hoshii", "level": 3, "category": "Desire",
+    "pattern": "〜てほしい", "formation": "Verb て-form + ほしい",
+    "meaning": "want someone (else) to do.",
+    "match": ["てほしい", "て欲しい"],
+    "note": "The person asked is marked with に.",
+    "examples": [{"jp": "もう少し待ってほしい。", "en": "I'd like you to wait a bit longer."}]
+  },
+  {
+    "id": "n3_tagaru", "level": 3, "category": "Desire",
+    "pattern": "〜たがる", "formation": "Verb stem + たがる",
+    "meaning": "shows signs of wanting to. Used of a third person.",
+    "match": ["たがって", "たがる", "たがった"],
+    "note": "You cannot see inside someone else, so their desire is described as behaviour.",
+    "examples": [{"jp": "子供が外へ行きたがっている。", "en": "The child wants to go outside."}]
+  },
+  {
+    "id": "n3_passive", "level": 3, "category": "Voice",
+    "pattern": "受身形（〜られる）", "formation": "Verb + れる / られる",
+    "meaning": "passive. Also the 'suffering passive', where something is done to your detriment.",
+    "match": ["られた", "された", "れました"],
+    "examples": [{"jp": "雨に降られた。", "en": "I got caught in the rain."}]
+  },
+  {
+    "id": "n3_causative", "level": 3, "category": "Voice",
+    "pattern": "使役形（〜させる）", "formation": "Verb + せる / させる",
+    "meaning": "causative: make or let someone do.",
+    "match": ["させた", "させる", "せました"],
+    "note": "を for 'make', に for 'let', when the verb is intransitive.",
+    "examples": [{"jp": "子供に野菜を食べさせた。", "en": "I made the child eat vegetables."}]
+  },
+  {
+    "id": "n3_causative_passive", "level": 3, "category": "Voice",
+    "pattern": "使役受身（〜させられる）", "formation": "Verb + させられる",
+    "meaning": "be made to do. Always unwilling.",
+    "match": ["させられた", "させられる"],
+    "examples": [{"jp": "二時間も待たされた。", "en": "I was kept waiting two whole hours."}]
+  },
+  {
+    "id": "n3_keigo_sonkei", "level": 3, "category": "Politeness",
+    "pattern": "尊敬語（お〜になる）", "formation": "お + Verb stem + になる",
+    "meaning": "honorific: raises the person you are talking about.",
+    "match": ["になります", "お帰りに", "ご覧に"],
+    "examples": [{"jp": "先生はもうお帰りになりました。", "en": "The teacher has already gone home."}]
+  },
+  {
+    "id": "n3_keigo_kenjou", "level": 3, "category": "Politeness",
+    "pattern": "謙譲語（お〜する）", "formation": "お + Verb stem + する",
+    "meaning": "humble: lowers yourself to raise the listener.",
+    "match": ["お持ちします", "いたします", "お願いします"],
+    "examples": [{"jp": "お荷物をお持ちします。", "en": "Let me carry your bag."}]
+  },
+  {
+    "id": "n3_ka_dou_ka", "level": 3, "category": "Embedded questions",
+    "pattern": "〜かどうか", "formation": "Plain form + かどうか",
+    "meaning": "whether or not.",
+    "match": ["かどうか"],
+    "examples": [{"jp": "行くかどうかまだ決めていない。", "en": "I haven't decided whether to go."}]
+  },
+  {
+    "id": "n3_no_ni_purpose", "level": 3, "category": "Purpose",
+    "pattern": "〜のに（用途）", "formation": "Dictionary form + のに",
+    "meaning": "for the purpose of; used for. Not the concessive のに.",
+    "match": ["のに使", "のに便利", "のに必要"],
+    "examples": [{"jp": "この道具は野菜を切るのに使う。", "en": "This tool is used for cutting vegetables."}]
+  },
+  {
+    "id": "n3_tame_purpose", "level": 3, "category": "Purpose",
+    "pattern": "〜ために（目的）", "formation": "Dictionary form + ために",
+    "meaning": "in order to. The subject must be the same in both clauses.",
+    "match": ["ために", "ための"],
+    "examples": [{"jp": "健康のために毎日歩く。", "en": "I walk every day for my health."}]
+  },
+  {
+    "id": "n3_you_ni_purpose", "level": 3, "category": "Purpose",
+    "pattern": "〜ように（目的）", "formation": "Potential / ない form + ように",
+    "meaning": "so that. Used when the outcome is not directly under your control.",
+    "match": ["ように", "ないように"],
+    "note": "ために takes a volitional verb, ように a non-volitional one — the distinction N3 actually tests.",
+    "examples": [{"jp": "忘れないようにメモした。", "en": "I made a note so I wouldn't forget."}]
+  },
+  {
+    "id": "n3_nikui_yasui", "level": 3, "category": "Ease",
+    "pattern": "〜にくい / 〜やすい", "formation": "Verb stem + にくい / やすい",
+    "meaning": "hard to / easy to do.",
+    "match": ["にくい", "やすい"],
+    "examples": [{"jp": "この字は読みにくい。", "en": "This handwriting is hard to read."}]
+  },
+  {
+    "id": "n3_sugiru", "level": 3, "category": "Degree",
+    "pattern": "〜すぎる", "formation": "Verb stem / adjective stem + すぎる",
+    "meaning": "too much; excessively.",
+    "match": ["すぎる", "すぎた", "過ぎる"],
+    "examples": [{"jp": "食べすぎて動けない。", "en": "I ate too much and can't move."}]
+  },
+  {
+    "id": "n3_kata", "level": 3, "category": "Manner",
+    "pattern": "〜方", "formation": "Verb stem + 方",
+    "meaning": "the way of doing; how to.",
+    "match": ["の使い方", "作り方", "読み方"],
+    "examples": [{"jp": "漢字の書き方を教えてください。", "en": "Please teach me how to write kanji."}]
+  },
+  {
+    "id": "n3_mitai_ni", "level": 3, "category": "Comparison",
+    "pattern": "〜みたいに / 〜のように", "formation": "Noun + みたいに / のように",
+    "meaning": "like; in the manner of.",
+    "match": ["みたいに", "のように"],
+    "examples": [{"jp": "子供のように喜んだ。", "en": "He was as delighted as a child."}]
+  },
+  {
+    "id": "n3_toshite", "level": 3, "category": "Role",
+    "pattern": "〜として", "formation": "Noun + として",
+    "meaning": "as; in the capacity of.",
+    "match": ["として"],
+    "examples": [{"jp": "彼は医者として働いている。", "en": "He works as a doctor."}]
+  },
+  {
+    "id": "n3_kawari_ni", "level": 3, "category": "Exchange",
+    "pattern": "〜かわりに", "formation": "Plain form / Noun + の + かわりに",
+    "meaning": "instead of; in exchange for.",
+    "match": ["かわりに", "代わりに"],
+    "examples": [{"jp": "父のかわりに私が行きます。", "en": "I'll go instead of my father."}]
+  },
+  {
+    "id": "n3_hanmen", "level": 3, "category": "Contrast",
+    "pattern": "〜反面", "formation": "Plain form + 反面",
+    "meaning": "on the other hand; while. Two true sides of one thing.",
+    "match": ["反面"],
+    "examples": [{"jp": "便利な反面、値段が高い。", "en": "It's convenient, but on the other hand expensive."}]
+  },
+  {
+    "id": "n3_ippou_de", "level": 3, "category": "Contrast",
+    "pattern": "〜一方（で）", "formation": "Plain form + 一方で",
+    "meaning": "while; meanwhile. Sets two facts side by side.",
+    "match": ["一方で", "一方、"],
+    "examples": [{"jp": "収入が増える一方で、支出も増えた。", "en": "While income rose, so did spending."}]
+  },
+  {
+    "id": "n3_ni_kawatte", "level": 3, "category": "Exchange",
+    "pattern": "〜に代わって", "formation": "Noun + に代わって",
+    "meaning": "on behalf of; in place of.",
+    "match": ["に代わって", "にかわって"],
+    "examples": [{"jp": "社長に代わって挨拶します。", "en": "I'll give the address on behalf of the president."}]
+  },
+  {
+    "id": "n3_ni_kuraberu", "level": 3, "category": "Comparison",
+    "pattern": "〜に比べて", "formation": "Noun + に比べて",
+    "meaning": "compared with.",
+    "match": ["に比べて", "に比べ"],
+    "examples": [{"jp": "去年に比べて寒い。", "en": "It's cold compared with last year."}]
+  },
+  {
+    "id": "n3_ni_shitagatte", "level": 3, "category": "Correlation",
+    "pattern": "〜にしたがって / 〜につれて", "formation": "Dictionary form / Noun + にしたがって",
+    "meaning": "as … proceeds, … . Two things changing together.",
+    "match": ["にしたがって", "につれて", "に従って"],
+    "examples": [{"jp": "年を取るにつれて記憶力が落ちる。", "en": "As you age, your memory declines."}]
+  },
+  {
+    "id": "n3_totan", "level": 3, "category": "Time",
+    "pattern": "〜とたん（に）", "formation": "Verb た-form + とたんに",
+    "meaning": "the moment that; no sooner than. The second event is a surprise.",
+    "match": ["とたん", "途端"],
+    "note": "Cannot be used for something you planned — it must be unexpected.",
+    "examples": [{"jp": "ドアを開けたとたん、猫が逃げた。", "en": "The moment I opened the door, the cat ran off."}]
+  },
+  {
+    "id": "n3_ba_kari_ni", "level": 3, "category": "Time",
+    "pattern": "〜ところに / 〜ところへ", "formation": "ている / た form + ところに",
+    "meaning": "just as; right at the moment when.",
+    "match": ["ところに", "ところへ"],
+    "examples": [{"jp": "出かけるところに電話が来た。", "en": "Just as I was leaving, a call came."}]
+  },
+  {
+    "id": "n3_igai", "level": 3, "category": "Exception",
+    "pattern": "〜以外（に）", "formation": "Noun / Plain form + 以外に",
+    "meaning": "other than; apart from.",
+    "match": ["以外に", "以外は", "以外の"],
+    "examples": [{"jp": "私以外は全員来た。", "en": "Everyone but me came."}]
+  },
+  {
+    "id": "n3_nuki", "level": 3, "category": "Exception",
+    "pattern": "〜抜きで", "formation": "Noun + 抜きで",
+    "meaning": "without; leaving out.",
+    "match": ["抜きで", "抜きに"],
+    "examples": [{"jp": "冗談抜きで話そう。", "en": "Let's talk seriously, joking aside."}]
+  },
+  {
+    "id": "n3_kagiri", "level": 3, "category": "Limitation",
+    "pattern": "〜限り", "formation": "Dictionary / ない form + 限り",
+    "meaning": "as far as; as long as.",
+    "match": ["限り", "かぎり"],
+    "examples": [{"jp": "私の知る限り、彼は正直だ。", "en": "As far as I know, he's honest."}]
+  },
+  {
+    "id": "n3_ni_saishite", "level": 3, "category": "Occasion",
+    "pattern": "〜に際して", "formation": "Dictionary form / Noun + に際して",
+    "meaning": "on the occasion of. Formal, for significant moments.",
+    "match": ["に際して", "にさいして"],
+    "examples": [{"jp": "開会に際して一言申し上げます。", "en": "Let me say a word on the occasion of this opening."}]
+  },
+  {
+    "id": "n3_ni_atatte", "level": 3, "category": "Occasion",
+    "pattern": "〜にあたって", "formation": "Dictionary form / Noun + にあたって",
+    "meaning": "on the occasion of; prior to. Formal, before something important.",
+    "match": ["にあたって", "にあたり"],
+    "examples": [{"jp": "出発にあたって注意事項を確認する。", "en": "Before departure, we'll go over the precautions."}]
+  },
+  {
+    "id": "n3_kke", "level": 3, "category": "Recall",
+    "pattern": "〜っけ", "formation": "Plain form + っけ",
+    "meaning": "what was it again? Casual, asking yourself or a friend to confirm.",
+    "match": ["っけ"],
+    "examples": [{"jp": "明日、何時だっけ。", "en": "What time was it tomorrow again?"}]
+  },
+  {
+    "id": "n3_mono_ka", "level": 3, "category": "Refusal",
+    "pattern": "〜ものか", "formation": "Plain form + ものか",
+    "meaning": "as if; there's no way I would. An emphatic refusal.",
+    "match": ["ものか", "もんか"],
+    "examples": [{"jp": "二度と行くものか。", "en": "I'm never going there again."}]
+  },
+  {
+    "id": "n3_tokoro_de", "level": 3, "category": "Concession",
+    "pattern": "〜たところで", "formation": "Verb た-form + ところで",
+    "meaning": "even if; no matter how much. The effort will not help.",
+    "match": ["たところで"],
+    "examples": [{"jp": "急いだところで間に合わない。", "en": "Even if I hurry, I won't make it."}]
+  },
+  {
+    "id": "n3_ni_suginai", "level": 3, "category": "Limitation",
+    "pattern": "〜にすぎない", "formation": "Plain form / Noun + にすぎない",
+    "meaning": "is no more than; merely.",
+    "match": ["にすぎない"],
+    "examples": [{"jp": "それは言い訳にすぎない。", "en": "That's nothing but an excuse."}]
+  },
+  {
+    "id": "n3_ni_chigai_kotonaru", "level": 3, "category": "Contrast",
+    "pattern": "〜と異なり / 〜と違って", "formation": "Noun + と違って",
+    "meaning": "unlike; in contrast to.",
+    "match": ["と違って", "と異なり"],
+    "examples": [{"jp": "兄と違って、私は運動が苦手だ。", "en": "Unlike my brother, I'm bad at sport."}]
+  },
+  {
+    "id": "n3_te_bakari_irarenai", "level": 3, "category": "Urgency",
+    "pattern": "〜てばかりはいられない", "formation": "Verb て-form + ばかりはいられない",
+    "meaning": "can't just keep doing; can't afford to.",
+    "match": ["ばかりはいられない", "てばかりも"],
+    "examples": [{"jp": "泣いてばかりはいられない。", "en": "I can't just keep crying."}]
+  },
+  {
+    "id": "n3_dake_ni", "level": 3, "category": "Cause and reason",
+    "pattern": "〜だけに", "formation": "Plain form + だけに",
+    "meaning": "precisely because; all the more so because.",
+    "match": ["だけに"],
+    "examples": [{"jp": "期待していただけに残念だ。", "en": "It's disappointing precisely because I had hopes."}]
+  },
+  {
+    "id": "n3_bun_dake", "level": 3, "category": "Proportion",
+    "pattern": "〜だけ / 〜分だけ", "formation": "Dictionary form + だけ",
+    "meaning": "as much as; to the extent one can.",
+    "match": ["できるだけ", "だけ食べ"],
+    "examples": [{"jp": "できるだけ早く来てください。", "en": "Please come as soon as you can."}]
+  },
+  {
+    "id": "n3_te_sae", "level": 3, "category": "Emphasis",
+    "pattern": "〜てさえ", "formation": "Verb て-form + さえ",
+    "meaning": "even doing; not even.",
+    "match": ["てさえ", "でさえ"],
+    "examples": [{"jp": "名前さえ書けなかった。", "en": "He couldn't even write his name."}]
+  },
+  {
+    "id": "n3_ki_ga_suru", "level": 3, "category": "Feeling",
+    "pattern": "〜気がする", "formation": "Plain form + 気がする",
+    "meaning": "have a feeling that.",
+    "match": ["気がする", "気がした"],
+    "examples": [{"jp": "どこかで会った気がする。", "en": "I feel like we've met somewhere."}]
+  },
+  {
+    "id": "n3_kotoga_aru", "level": 3, "category": "Experience",
+    "pattern": "〜たことがある", "formation": "Verb た-form + ことがある",
+    "meaning": "have done before; there are times when.",
+    "match": ["たことがある", "たことがあり"],
+    "examples": [{"jp": "富士山に登ったことがある。", "en": "I've climbed Mt Fuji before."}]
+  },
+  {
+    "id": "n3_you_ni_iu", "level": 3, "category": "Reported requests",
+    "pattern": "〜ように言う", "formation": "Dictionary / ない form + ように言う",
+    "meaning": "tell someone to. Reports an instruction.",
+    "match": ["ように言", "ように伝え"],
+    "examples": [{"jp": "静かにするように言われた。", "en": "I was told to be quiet."}]
+  },
+  {
+    "id": "n3_ba_ii", "level": 3, "category": "Advice",
+    "pattern": "〜ばいい", "formation": "Verb ば-form + いい",
+    "meaning": "should; it would be good if. Also 'all you have to do is'.",
+    "match": ["ばいい", "ればいい"],
+    "examples": [{"jp": "分からなければ聞けばいい。", "en": "If you don't understand, just ask."}]
+  },
+  {
+    "id": "n3_ni_you", "level": 3, "category": "Purpose",
+    "pattern": "〜向け / 〜向き", "formation": "Noun + 向け / 向き",
+    "meaning": "aimed at (向け) / suited to (向き).",
+    "match": ["向けの", "向きの", "向けに"],
+    "note": "向け is a deliberate target; 向き is a natural fit.",
+    "examples": [{"jp": "子供向けの本。", "en": "A book aimed at children."}]
+  },
+  {
+    "id": "n3_darake", "level": 3, "category": "Excess",
+    "pattern": "〜だらけ", "formation": "Noun + だらけ",
+    "meaning": "covered in; full of. Always something unpleasant.",
+    "match": ["だらけ"],
+    "examples": [{"jp": "間違いだらけの作文。", "en": "An essay riddled with mistakes."}]
+  },
+  {
+    "id": "n3_mukashi_you", "level": 3, "category": "Appearance",
+    "pattern": "〜そうだ（様態）", "formation": "Verb stem / adjective stem + そうだ",
+    "meaning": "looks like; seems about to. From what you can see.",
+    "match": ["そうな", "そうに", "落ちそう"],
+    "note": "いい becomes よさそう and ない becomes なさそう — both irregular and both tested.",
+    "examples": [{"jp": "雨が降りそうだ。", "en": "It looks like it's going to rain."}]
+  },
+  {
+    "id": "n3_owari_ni", "level": 3, "category": "Sequence",
+    "pattern": "〜てから", "formation": "Verb て-form + から",
+    "meaning": "after doing. Emphasises the order.",
+    "match": ["てから", "でから"],
+    "examples": [{"jp": "手を洗ってから食べなさい。", "en": "Wash your hands before you eat."}]
+  },
+  {
+    "id": "n3_ato_de", "level": 3, "category": "Sequence",
+    "pattern": "〜あとで", "formation": "Verb た-form / Noun + の + あとで",
+    "meaning": "after.",
+    "match": ["あとで", "後で"],
+    "examples": [{"jp": "食事のあとで散歩した。", "en": "I took a walk after the meal."}]
+  },
+  {
+    "id": "n3_mae_ni", "level": 3, "category": "Sequence",
+    "pattern": "〜前に", "formation": "Dictionary form / Noun + の + 前に",
+    "meaning": "before.",
+    "match": ["前に"],
+    "note": "Always the dictionary form, never the past, however long ago it was.",
+    "examples": [{"jp": "寝る前に歯を磨く。", "en": "I brush my teeth before bed."}]
+  }
+]
