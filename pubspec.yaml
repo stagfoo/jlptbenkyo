@@ -1,7 +1,7 @@
 name: jlptbenkyo
 description: "JLPT study — N5 through N3 vocabulary, kanji, grammar, reading, listening, speaking and writing."
 publish_to: 'none'
-version: 0.1.0+1
+version: 0.1.1+2
 
 environment:
   # Matches the installed Dart (3.13.0), not the conservative version
