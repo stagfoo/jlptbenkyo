@@ -28,7 +28,7 @@ same source.
 | **Reading** | Graded sentences, translation hidden until asked for |
 | **Listening** | Device Japanese TTS, with a speed control |
 | **Speaking** | Record an attempt, play it against the reference |
-| **Writing** | Trace kanji stroke by stroke, in the right order |
+| **Writing** | Trace kanji stroke by stroke, ordered by what your deck needs |
 | **Grammar** | 145 points with real attested examples |
 | **Daily challenge** | A real-world task to attempt out loud, chosen to fit your deck |
 
@@ -206,7 +206,50 @@ Both are **continuous sliders**. The right number is found by living with
 it for a week and nudging, and a stepped control always stops just past
 the value you were heading for.
 
-## Writing practice
+## Writing practice: driven by your deck
+
+**402 of the 609 kanji here appear in words easier than the character
+itself.** 遊 is an N3 character and 遊ぶ an N5 word; 部屋, 本当 and 飛行機
+are all N5 words built from N3 kanji. So if you have been studying
+vocabulary, you have spent a year reading characters nobody has taught
+you to write — you know the word, you can say it, and the character is a
+blank.
+
+A frequency list is therefore the wrong order. The writing exercise ranks
+characters by what the deck is actually asking for, and says why each one
+is in front of you:
+
+| Band | Means |
+| --- | --- |
+| **You know the word, not the character** | A word using it is comfortable (21+ day interval) and the character is not. The gap this exists for. |
+| **Due for review** | Its own card is overdue. |
+| **Turns up in words you are learning** | You have started words using it, but neither is settled. |
+| **Not in your deck yet** | Nothing you study uses it. Sinks to the bottom, never disappears. |
+
+The score is demand × weakness. Demand is how many of *your* started
+words use it, logarithmically — the fifth word adds far less than the
+second, because linear counting lets a handful of very common characters
+crowd out everything for weeks. Weakness is how little grip you have on
+the character, with lapses counting beyond what the interval says.
+
+Ties break on **gap width**: the character whose easiest word runs
+furthest ahead of it. Among characters the deck wants equally, the one
+hiding inside much easier words is the real blind spot.
+
+Being honest about what this does not fix: on a cold start with no kanji
+studied, demand dominates and the very common characters still come
+first. That resolves itself — those cards get studied early, their
+weakness drops, and they leave the top band on their own.
+
+### The direct route
+
+The ranked list is the sweep. The faster path is that **every vocabulary
+card now offers its own characters**: answer 遊ぶ, and 遊 is a tap away
+under "Write it", with the word you just recalled shown above the tracing
+pad. The moment you have retrieved a word is when its characters mean the
+most, and that beats finding it in a list of six hundred.
+
+## How the tracing works
 
 KanjiVG gives strokes in the order a person actually writes them, which
 is the whole value — stroke order is what makes handwriting legible and
@@ -226,6 +269,21 @@ one fall through as if absent, and its numbers were then eaten by
 whichever command was still active, producing a model stroke built from
 misread coordinates that every attempt would fail against for no visible
 reason.
+
+## Grammar, ordered by study
+
+The grammar list defaults to **what you are about to forget** rather than
+to categories: due points first, then learning, then known, then not
+started. Within each band, the points whose example sentences you can
+actually read come first — a structure demonstrated in words you know is
+a structure you can see, and one demonstrated in words you do not is two
+problems at once. That ordering comes from a real join, grammar →
+sentence → word, against your card states.
+
+Category order is still a tap away, and is the better view when you want
+the families side by side: the four conditionals, the three ways of
+saying "because", the pair that mean "thanks to" and "because of, damn
+it" only make sense next to each other.
 
 ## Speaking
 
@@ -262,6 +320,7 @@ imports, so they test with no device attached.
 | `lib/writing_screen.dart` | Stroke tracing; its parser and comparison are pure and tested |
 | `lib/speech.dart`, `lib/notifications.dart` | The thin layer that touches plugins |
 | `lib/challenge.dart` | Picking the day's challenge and matching it to the deck |
+| `lib/focus.dart` | Ranking kanji and grammar against what you are actually studying |
 | `tool/build_content.py` | Everything above, assembled from open data |
 
 **Progress lives in a separate database from the content**, and that

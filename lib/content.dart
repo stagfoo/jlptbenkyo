@@ -404,6 +404,118 @@ class ContentDb {
     return [for (final r in rows) Sentence.fromRow(r)];
   }
 
+  /// The kanji inside a written word, in the order they appear.
+  ///
+  /// Kana and punctuation simply do not match a row, so 遊ぶ returns one
+  /// character and ひらがな returns none — no filtering needed beyond the
+  /// lookup itself.
+  Future<List<Kanji>> kanjiInText(String text) async {
+    final seen = <String>[];
+    for (final ch in text.split('')) {
+      if (!seen.contains(ch)) seen.add(ch);
+    }
+    if (seen.isEmpty) return const [];
+    final marks = List.filled(seen.length, '?').join(',');
+    final rows = await _db
+        .rawQuery('SELECT * FROM kanji WHERE literal IN ($marks)', seen);
+    final byLiteral = {
+      for (final r in rows) r['literal']! as String: Kanji.fromRow(r),
+    };
+    return [for (final ch in seen) ?byLiteral[ch]];
+  }
+
+  // ------------------------------------------------------------- focus
+
+  /// Every kanji with the deck words written with it.
+  ///
+  /// Loaded whole because the writing ranking has to score all of them
+  /// against the deck at once — one query and one join beats six hundred
+  /// round trips, and the result is a few thousand integers.
+  ///
+  /// [withStrokesOnly] drops characters KanjiVG had no paths for, since
+  /// offering a tracing exercise with nothing to trace is worse than
+  /// leaving the character out.
+  Future<
+      List<
+          ({
+            int id,
+            String literal,
+            int level,
+            int? easiestWordLevel,
+            List<int> wordIds
+          })>> kanjiWithWords({
+    int easiestLevel = 5,
+    bool withStrokesOnly = true,
+  }) async {
+    final rows = await _db.query(
+      'kanji',
+      columns: ['id', 'literal', 'level'],
+      where: 'level <= ?'
+          '${withStrokesOnly ? ' AND strokes_svg IS NOT NULL' : ''}',
+      whereArgs: [easiestLevel],
+    );
+    // The easiest word is computed here rather than in Dart because the
+    // level is on the word row, and pulling 3,500 of those across to take
+    // a maximum would be wasteful.
+    final links = await _db.rawQuery('''
+      SELECT kw.kanji_id kid, kw.word_id wid, w.level wlevel
+      FROM kanji_word kw JOIN word w ON w.id = kw.word_id
+    ''');
+    final byKanji = <int, List<int>>{};
+    final easiest = <int, int>{};
+    for (final l in links) {
+      final kid = l['kid']! as int;
+      byKanji.putIfAbsent(kid, () => []).add(l['wid']! as int);
+      final level = l['wlevel']! as int;
+      // Levels count down, so the easiest word is the highest number.
+      if (level > (easiest[kid] ?? 0)) easiest[kid] = level;
+    }
+    return [
+      for (final r in rows)
+        (
+          id: r['id']! as int,
+          literal: r['literal']! as String,
+          level: r['level']! as int,
+          easiestWordLevel: easiest[r['id']],
+          wordIds: byKanji[r['id']] ?? const <int>[],
+        ),
+    ];
+  }
+
+  /// Every grammar point with the deck words its examples are built from.
+  ///
+  /// Two hops — grammar to sentence, sentence to word — done in SQL
+  /// rather than in Dart, because the middle table is 26,000 rows and
+  /// pulling it across to join by hand would be the slowest thing in the
+  /// app.
+  Future<List<({int id, int level, List<int> wordIds})>> grammarWithWords({
+    int easiestLevel = 5,
+  }) async {
+    final rows = await _db.query('grammar',
+        columns: ['id', 'level'],
+        where: 'level <= ?',
+        whereArgs: [easiestLevel]);
+    final links = await _db.rawQuery('''
+      SELECT DISTINCT gs.grammar_id gid, ws.word_id wid
+      FROM grammar_sentence gs
+      JOIN word_sentence ws ON ws.sentence_id = gs.sentence_id
+    ''');
+    final byGrammar = <int, List<int>>{};
+    for (final l in links) {
+      byGrammar
+          .putIfAbsent(l['gid']! as int, () => [])
+          .add(l['wid']! as int);
+    }
+    return [
+      for (final r in rows)
+        (
+          id: r['id']! as int,
+          level: r['level']! as int,
+          wordIds: byGrammar[r['id']] ?? const <int>[],
+        ),
+    ];
+  }
+
   // -------------------------------------------------------- challenges
 
   /// Every challenge, with the deck words each is built from.

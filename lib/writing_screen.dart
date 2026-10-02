@@ -18,6 +18,7 @@ import 'package:flutter/material.dart';
 
 import 'app_state.dart';
 import 'content.dart';
+import 'focus.dart';
 import 'theme.dart';
 
 /// KanjiVG draws on a 109-unit square.
@@ -41,9 +42,20 @@ class WritingScreen extends StatefulWidget {
 }
 
 class _WritingScreenState extends State<WritingScreen> {
-  List<Kanji> _kanji = const [];
+  /// The characters, ordered by how much the deck needs them rather than
+  /// by frequency — see `lib/focus.dart` for why that matters.
+  List<KanjiFocus> _ranked = const [];
+
+  /// The words of yours that use each character, for the "you know this
+  /// word" line. Loaded once for the whole ranking.
+  Map<int, Word> _words = const {};
+
   int _index = 0;
   bool _loading = true;
+
+  /// Hide characters nothing in the deck uses yet. On by default: the
+  /// whole point is to work on what you are meeting.
+  bool _deckOnly = true;
 
   @override
   void initState() {
@@ -52,15 +64,37 @@ class _WritingScreenState extends State<WritingScreen> {
   }
 
   Future<void> _load() async {
-    final all = await widget.app.content.kanji(
-      easiestLevel: widget.app.settings.easiestLevel,
+    final app = widget.app;
+    final refs = await app.content.kanjiWithWords(
+      easiestLevel: app.settings.easiestLevel,
     );
-    // Only characters that actually have stroke data. Offering a writing
-    // exercise with nothing to trace is worse than not listing it.
-    final usable = [for (final k in all) if (k.strokePaths.isNotEmpty) k];
+    final ranked = rankForWriting(
+      [
+        for (final r in refs)
+          KanjiRef(
+            id: r.id,
+            literal: r.literal,
+            level: r.level,
+            wordIds: r.wordIds,
+            easiestWordLevel: r.easiestWordLevel,
+          ),
+      ],
+      app.states,
+      DateTime.now(),
+      deckOnly: _deckOnly,
+    );
+
+    // Only the example words actually shown, not all 3,500.
+    final wanted = <int>{
+      for (final f in ranked.take(200)) ...f.exampleWordIds,
+    };
+    final words = await app.content.wordsByIds(wanted.toList());
+
     if (!mounted) return;
     setState(() {
-      _kanji = usable;
+      _ranked = ranked;
+      _words = {for (final w in words) w.id: w};
+      _index = 0;
       _loading = false;
     });
   }
@@ -73,33 +107,226 @@ class _WritingScreenState extends State<WritingScreen> {
         body: const Center(child: CircularProgressIndicator()),
       );
     }
-    if (_kanji.isEmpty) {
+    if (_ranked.isEmpty) {
       return Scaffold(
         appBar: AppBar(title: const Text('Writing')),
-        body: const Center(child: Text('No kanji with stroke data.')),
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(32),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Text(
+                  'Nothing in your deck uses a kanji yet. Study some '
+                  'vocabulary first, or turn this off to work through '
+                  'every character.',
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 16),
+                OutlinedButton(
+                  onPressed: () {
+                    setState(() => _deckOnly = false);
+                    _load();
+                  },
+                  child: const Text('Show every kanji'),
+                ),
+              ],
+            ),
+          ),
+        ),
       );
     }
 
-    final kanji = _kanji[_index];
+    final focus = _ranked[_index];
     return Scaffold(
       appBar: AppBar(
         title: const Text('Writing'),
         actions: [
+          IconButton(
+            tooltip: _deckOnly ? 'Showing your deck' : 'Showing every kanji',
+            icon: Icon(_deckOnly ? Icons.filter_alt : Icons.filter_alt_off),
+            onPressed: () {
+              setState(() => _deckOnly = !_deckOnly);
+              _load();
+            },
+          ),
           Center(
             child: Padding(
               padding: const EdgeInsets.only(right: 12),
-              child: Text('${_index + 1} / ${_kanji.length}'),
+              child: Text('${_index + 1} / ${_ranked.length}'),
             ),
           ),
         ],
       ),
-      body: _TracePad(
-        key: ValueKey(kanji.id),
-        kanji: kanji,
-        onNext: () => setState(
-            () => _index = (_index + 1) % _kanji.length),
-        onPrevious: () => setState(() =>
-            _index = (_index - 1 + _kanji.length) % _kanji.length),
+      body: FutureBuilder<Kanji?>(
+        // The stroke paths are a kilobyte or two per character, so they
+        // are fetched for the one on screen rather than for all 612.
+        key: ValueKey(focus.kanji.id),
+        future: widget.app.content.kanjiById(focus.kanji.id),
+        builder: (context, snap) {
+          final kanji = snap.data;
+          if (kanji == null) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          return Column(
+            children: [
+              _WhyThisOne(
+                focus: focus,
+                words: _words,
+              ),
+              Expanded(
+                child: _TracePad(
+                  key: ValueKey(kanji.id),
+                  kanji: kanji,
+                  onNext: () => setState(
+                      () => _index = (_index + 1) % _ranked.length),
+                  onPrevious: () => setState(() =>
+                      _index = (_index - 1 + _ranked.length) %
+                          _ranked.length),
+                ),
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+}
+
+/// Why this character is in front of you.
+///
+/// The single most useful thing on the screen, and the reason the whole
+/// ranking exists: "you know 遊ぶ — あそぶ, to play" turns an arbitrary
+/// character into a specific thing you are missing.
+class _WhyThisOne extends StatelessWidget {
+  const _WhyThisOne({required this.focus, required this.words});
+
+  final KanjiFocus focus;
+  final Map<int, Word> words;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final examples = [
+      for (final id in focus.exampleWordIds) ?words[id],
+    ];
+
+    final (icon, label, colour) = switch (focus.reason) {
+      FocusReason.knowWordNotKanji => (
+          Icons.lightbulb_outline,
+          'You know the word, not the character',
+          theme.colorScheme.primary,
+        ),
+      FocusReason.dueForReview => (
+          Icons.schedule,
+          'Due for review',
+          theme.colorScheme.secondary,
+        ),
+      FocusReason.inYourWords => (
+          Icons.link,
+          'Turns up in words you are learning',
+          theme.colorScheme.secondary,
+        ),
+      FocusReason.notYetNeeded => (
+          Icons.explore_outlined,
+          'Not in your deck yet',
+          theme.colorScheme.outline,
+        ),
+    };
+
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.fromLTRB(16, 10, 16, 10),
+      color: theme.colorScheme.surfaceContainerHighest,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(icon, size: 16, color: colour),
+              const SizedBox(width: 6),
+              Expanded(
+                child: Text(label,
+                    style: theme.textTheme.labelMedium
+                        ?.copyWith(color: colour)),
+              ),
+            ],
+          ),
+          if (examples.isNotEmpty) ...[
+            const SizedBox(height: 6),
+            Wrap(
+              spacing: 12,
+              runSpacing: 4,
+              children: [
+                for (final w in examples.take(3))
+                  Text.rich(
+                    TextSpan(children: [
+                      TextSpan(
+                        text: w.expression,
+                        style: const TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.w500),
+                      ),
+                      TextSpan(
+                        text: w.hasKanji
+                            ? '  ${w.reading} · ${w.meaning}'
+                            : '  ${w.meaning}',
+                        style: theme.textTheme.bodySmall,
+                      ),
+                    ]),
+                  ),
+              ],
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
+/// Tracing one character, opened from somewhere else.
+///
+/// The direct answer to "let me write the kanji on the card I am
+/// practising": you are reviewing 遊ぶ, you can read it and could not
+/// write 遊, and the character is one tap away rather than somewhere in a
+/// list of six hundred.
+class KanjiTraceScreen extends StatelessWidget {
+  const KanjiTraceScreen({super.key, required this.kanji, this.context_});
+
+  final Kanji kanji;
+
+  /// The word you came from, shown above the pad so the character keeps
+  /// the meaning it had a moment ago.
+  final String? context_;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text(kanji.literal)),
+      body: Column(
+        children: [
+          if (context_ != null)
+            Container(
+              width: double.infinity,
+              color: Theme.of(context).colorScheme.surfaceContainerHighest,
+              padding: const EdgeInsets.all(12),
+              child: Text(
+                'from $context_',
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
+            ),
+          Expanded(
+            child: kanji.strokePaths.isEmpty
+                ? const Center(
+                    child: Text('No stroke data for this character.'))
+                : _TracePad(
+                    kanji: kanji,
+                    nextLabel: 'Done',
+                    showPrevious: false,
+                    onNext: () => Navigator.of(context).pop(),
+                    onPrevious: () => Navigator.of(context).pop(),
+                  ),
+          ),
+        ],
       ),
     );
   }
@@ -111,10 +338,14 @@ class _TracePad extends StatefulWidget {
     required this.kanji,
     required this.onNext,
     required this.onPrevious,
+    this.nextLabel = 'Next kanji',
+    this.showPrevious = true,
   });
 
   final Kanji kanji;
   final VoidCallback onNext, onPrevious;
+  final String nextLabel;
+  final bool showPrevious;
 
   @override
   State<_TracePad> createState() => _TracePadState();
@@ -425,11 +656,13 @@ class _TracePadState extends State<_TracePad> {
             padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
             child: Row(
               children: [
-                IconButton.outlined(
-                  icon: const Icon(Icons.chevron_left),
-                  onPressed: widget.onPrevious,
-                ),
-                const SizedBox(width: 8),
+                if (widget.showPrevious) ...[
+                  IconButton.outlined(
+                    icon: const Icon(Icons.chevron_left),
+                    onPressed: widget.onPrevious,
+                  ),
+                  const SizedBox(width: 8),
+                ],
                 Expanded(
                   child: OutlinedButton.icon(
                     icon: const Icon(Icons.refresh),
@@ -445,7 +678,7 @@ class _TracePadState extends State<_TracePad> {
                 Expanded(
                   child: FilledButton(
                     onPressed: widget.onNext,
-                    child: const Text('Next kanji'),
+                    child: Text(widget.nextLabel),
                   ),
                 ),
               ],

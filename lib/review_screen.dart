@@ -21,6 +21,7 @@ import 'session.dart';
 import 'speech.dart';
 import 'srs.dart';
 import 'theme.dart';
+import 'writing_screen.dart';
 
 class ReviewScreen extends StatefulWidget {
   const ReviewScreen({super.key, required this.app, required this.queue});
@@ -244,7 +245,10 @@ class _CardFace extends StatelessWidget {
             ? await app.content.sentencesForWord(id, limit: 2)
             : const <Sentence>[];
         return _WordFace(
-            word: word, revealed: revealed, sentences: sentences);
+            app: app,
+            word: word,
+            revealed: revealed,
+            sentences: sentences);
 
       case CardKind.kanji:
         final kanji = await app.content.kanjiById(id);
@@ -277,11 +281,13 @@ Widget _levelChip(int level) => Chip(
 
 class _WordFace extends StatelessWidget {
   const _WordFace({
+    required this.app,
     required this.word,
     required this.revealed,
     required this.sentences,
   });
 
+  final AppState app;
   final Word word;
   final bool revealed;
   final List<Sentence> sentences;
@@ -324,9 +330,69 @@ class _WordFace extends StatelessWidget {
           ],
           const SizedBox(height: 12),
           Center(child: _SpeakButton(text: word.expression)),
+          // Write the characters in the word you have just read. The
+          // commonest gap at this level is knowing a word perfectly well
+          // and being unable to write it, and the moment you have just
+          // recalled the word is when the character means the most.
+          if (word.hasKanji) _WriteTheKanji(app: app, word: word),
           for (final s in sentences) _SentenceTile(sentence: s),
         ],
       ],
+    );
+  }
+}
+
+/// Tappable characters from the word just answered.
+class _WriteTheKanji extends StatelessWidget {
+  const _WriteTheKanji({required this.app, required this.word});
+
+  final AppState app;
+  final Word word;
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<List<Kanji>>(
+      future: app.content.kanjiInText(word.expression),
+      builder: (context, snap) {
+        final kanji = snap.data ?? const <Kanji>[];
+        // A word written only in kana, or in characters outside the
+        // level range, simply shows nothing here.
+        if (kanji.isEmpty) return const SizedBox.shrink();
+        return Padding(
+          padding: const EdgeInsets.only(top: 16),
+          child: Column(
+            children: [
+              Text('Write it',
+                  style: Theme.of(context).textTheme.labelMedium),
+              const SizedBox(height: 6),
+              Wrap(
+                alignment: WrapAlignment.center,
+                spacing: 10,
+                children: [
+                  for (final k in kanji)
+                    ActionChip(
+                      label: Text(k.literal,
+                          style: const TextStyle(fontSize: 26)),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 6, vertical: 10),
+                      onPressed: k.strokePaths.isEmpty
+                          ? null
+                          : () => Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (_) => KanjiTraceScreen(
+                                    kanji: k,
+                                    context_:
+                                        '${word.expression} · ${word.reading}',
+                                  ),
+                                ),
+                              ),
+                    ),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

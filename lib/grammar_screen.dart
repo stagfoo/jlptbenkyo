@@ -15,6 +15,7 @@ import 'package:flutter/material.dart';
 
 import 'app_state.dart';
 import 'content.dart';
+import 'focus.dart';
 import 'speech.dart';
 import 'theme.dart';
 
@@ -29,8 +30,18 @@ class GrammarScreen extends StatefulWidget {
 
 class _GrammarScreenState extends State<GrammarScreen> {
   List<GrammarPoint> _points = const [];
+
+  /// Where each point sits relative to your study, and how readable its
+  /// examples are with the words you have. Keyed by grammar id.
+  Map<int, GrammarFocus> _focus = const {};
+
   bool _loading = true;
   String _query = '';
+
+  /// Order by what the deck is asking for rather than by category. On by
+  /// default, because the reason to open this screen is usually "what am
+  /// I about to forget", not "show me the formal particles".
+  bool _byStudy = true;
 
   @override
   void initState() {
@@ -39,12 +50,24 @@ class _GrammarScreenState extends State<GrammarScreen> {
   }
 
   Future<void> _load() async {
+    final app = widget.app;
     final points =
-        await widget.app.content.grammar(
-            easiestLevel: widget.app.settings.easiestLevel);
+        await app.content.grammar(easiestLevel: app.settings.easiestLevel);
+    final refs = await app.content.grammarWithWords(
+      easiestLevel: app.settings.easiestLevel,
+    );
+    final ranked = rankGrammar(
+      [
+        for (final r in refs)
+          GrammarRef(id: r.id, level: r.level, wordIds: r.wordIds),
+      ],
+      app.states,
+      DateTime.now(),
+    );
     if (!mounted) return;
     setState(() {
       _points = points;
+      _focus = {for (final f in ranked) f.id: f};
       _loading = false;
     });
   }
@@ -65,12 +88,29 @@ class _GrammarScreenState extends State<GrammarScreen> {
   Widget build(BuildContext context) {
     final points = _filtered;
 
-    // Preserving the order the query gave them, so categories stay in the
-    // order the content database considers pedagogically sensible rather
-    // than in alphabetical order.
+    // Two orderings, and they answer different questions. By study is
+    // "what am I about to forget"; by category keeps the families
+    // together, which is the only way the four conditionals or the three
+    // ways of saying "because" make sense side by side.
     final grouped = <String, List<GrammarPoint>>{};
-    for (final p in points) {
-      grouped.putIfAbsent(p.category ?? 'Other', () => []).add(p);
+    if (_byStudy) {
+      final sorted = [...points]..sort((a, b) {
+          final fa = _focus[a.id], fb = _focus[b.id];
+          final sa = fa?.standing.index ?? GrammarStanding.notStarted.index;
+          final sb = fb?.standing.index ?? GrammarStanding.notStarted.index;
+          if (sa != sb) return sa.compareTo(sb);
+          final byScore = (fb?.score ?? 0).compareTo(fa?.score ?? 0);
+          return byScore != 0 ? byScore : a.id.compareTo(b.id);
+        });
+      for (final p in sorted) {
+        final standing =
+            _focus[p.id]?.standing ?? GrammarStanding.notStarted;
+        grouped.putIfAbsent(_standingLabel(standing), () => []).add(p);
+      }
+    } else {
+      for (final p in points) {
+        grouped.putIfAbsent(p.category ?? 'Other', () => []).add(p);
+      }
     }
 
     return Scaffold(
@@ -91,6 +131,22 @@ class _GrammarScreenState extends State<GrammarScreen> {
                     onChanged: (v) => setState(() => _query = v.trim()),
                   ),
                 ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: SegmentedButton<bool>(
+                    segments: const [
+                      ButtonSegment(
+                          value: true,
+                          label: Text('By what you are studying')),
+                      ButtonSegment(
+                          value: false, label: Text('By category')),
+                    ],
+                    selected: {_byStudy},
+                    onSelectionChanged: (s) =>
+                        setState(() => _byStudy = s.first),
+                  ),
+                ),
+                const SizedBox(height: 8),
                 Expanded(
                   child: points.isEmpty
                       ? const Center(child: Text('Nothing matches.'))
@@ -120,10 +176,18 @@ class _GrammarScreenState extends State<GrammarScreen> {
                                     maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                   ),
-                                  trailing: Text(
-                                    levelName(p.level),
-                                    style: TextStyle(
-                                        color: levelColour(p.level)),
+                                  trailing: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      if (_focus[p.id] case final f?)
+                                        _StandingDot(standing: f.standing),
+                                      const SizedBox(width: 8),
+                                      Text(
+                                        levelName(p.level),
+                                        style: TextStyle(
+                                            color: levelColour(p.level)),
+                                      ),
+                                    ],
                                   ),
                                   onTap: () =>
                                       Navigator.of(context).push(
@@ -140,6 +204,37 @@ class _GrammarScreenState extends State<GrammarScreen> {
                 ),
               ],
             ),
+    );
+  }
+}
+
+String _standingLabel(GrammarStanding s) => switch (s) {
+      GrammarStanding.due => 'Due now',
+      GrammarStanding.learning => 'Learning',
+      GrammarStanding.known => 'Known',
+      GrammarStanding.notStarted => 'Not started',
+    };
+
+/// A dot rather than a word: the list is long, the label is already the
+/// group heading, and a coloured dot reads at a glance while scrolling.
+class _StandingDot extends StatelessWidget {
+  const _StandingDot({required this.standing});
+
+  final GrammarStanding standing;
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = Theme.of(context).colorScheme;
+    final colour = switch (standing) {
+      GrammarStanding.due => scheme.error,
+      GrammarStanding.learning => scheme.primary,
+      GrammarStanding.known => scheme.outline,
+      GrammarStanding.notStarted => Colors.transparent,
+    };
+    return Container(
+      width: 8,
+      height: 8,
+      decoration: BoxDecoration(color: colour, shape: BoxShape.circle),
     );
   }
 }

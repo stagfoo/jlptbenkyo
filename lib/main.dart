@@ -187,14 +187,13 @@ class _HomeScreenState extends State<HomeScreen> {
             _Tile(
               icon: Icons.draw_outlined,
               title: 'Writing',
-              subtitle: 'Trace kanji stroke by stroke',
+              subtitle: 'Characters from the words you are learning',
               onTap: () => _push(WritingScreen(app: app)),
             ),
             _Tile(
               icon: Icons.rule_outlined,
               title: 'Grammar',
-              subtitle: '${app.content.meta['grammar'] ?? '—'} points, '
-                  'with real examples',
+              subtitle: 'Ordered by what you are about to forget',
               onTap: () => _push(GrammarScreen(app: app)),
             ),
             const SizedBox(height: 24),
